@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.signupController">
+   <children>
+      <AnchorPane layoutX="47.0" layoutY="43.0" prefHeight="507.0" prefWidth="910.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+         <children>
+            <Pane layoutX="486.0" layoutY="-1.0" prefHeight="530.0" prefWidth="424.0">
+               <children>
+                  <ImageView fitHeight="530.0" fitWidth="356.0" layoutX="74.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/carpentry.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label layoutX="22.0" layoutY="25.0" prefHeight="43.0" prefWidth="294.0" text="Let's Get Started,">
+               <font>
+                  <Font name="Georgia Bold" size="28.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fNameField" layoutX="22.0" layoutY="117.0" prefHeight="26.0" prefWidth="195.0" />
+            <TextField fx:id="lNameField" layoutX="272.0" layoutY="118.0" prefHeight="26.0" prefWidth="195.0" />
+            <TextField fx:id="EmalField" layoutX="22.0" layoutY="195.0" prefHeight="26.0" prefWidth="340.0" />
+            <PasswordField fx:id="passField" layoutX="22.0" layoutY="264.0" prefHeight="26.0" prefWidth="340.0" />
+            <PasswordField fx:id="rePassField" layoutX="22.0" layoutY="340.0" prefHeight="26.0" prefWidth="340.0" />
+            <Label layoutX="22.0" layoutY="100.0" prefHeight="18.0" prefWidth="112.0" text="First name" textFill="#797575" />
+            <Label layoutX="272.0" layoutY="100.0" prefHeight="18.0" prefWidth="112.0" text="Last name" textFill="#797575" />
+            <Label layoutX="22.0" layoutY="176.0" prefHeight="18.0" prefWidth="112.0" text="E_mail" textFill="#797575" />
+            <Label layoutX="22.0" layoutY="321.0" prefHeight="18.0" prefWidth="112.0" text="Re-enter Password" textFill="#797575" />
+            <Label layoutX="22.0" layoutY="245.0" prefHeight="18.0" prefWidth="112.0" text="Password" textFill="#797575" />
+            <JFXButton buttonType="RAISED" layoutX="140.0" layoutY="396.0" onAction="#btnOnsgnup" prefHeight="26.0" prefWidth="226.0" style="-fx-background-color: #1faed1d3;" text="Sign Up">
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.28421053290367126" green="0.8147368431091309" blue="0.9473684430122375" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006729475100942127">
+                           <color>
+                              <Color red="0.28421053290367126" green="0.8147368431091309" blue="0.9473684430122375" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.2823529541492462" green="0.8156862854957581" blue="0.9490196108818054" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+               <font>
+                  <Font name="Georgia Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Line endX="100.0" layoutX="116.0" layoutY="435.0" startX="25.939987182617188" startY="-3.0517578125E-5" stroke="#9c9999" />
+            <Line endX="100.0" layoutX="265.0" layoutY="435.0" startX="25.939987182617188" startY="-3.0517578125E-5" stroke="#868282" />
+            <Label layoutX="247.0" layoutY="427.0" text="or" />
+            <Label layoutX="143.0" layoutY="445.0" prefHeight="18.0" prefWidth="147.0" text="Already have a Account?" textFill="#aea9a9" />
+            <JFXButton buttonType="RAISED" layoutX="259.0" layoutY="441.0" onAction="#btnOnlogin" prefHeight="26.0" prefWidth="75.0" text="Log In" textFill="#31dcd1" />
+            <Label layoutX="22.0" layoutY="60.0" prefHeight="18.0" prefWidth="242.0" text="Enter the fields below to get  started">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
