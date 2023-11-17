@@ -12,7 +12,7 @@ public class MailUtil implements Runnable{
 
         public void setMsg(String msg) {
             this.msg = msg;
-        }
+        }//
 
         public void setTo(String to) {
             this.to = to;
