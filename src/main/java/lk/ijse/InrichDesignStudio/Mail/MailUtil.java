@@ -7,7 +7,7 @@ import java.util.Properties;
 public class MailUtil implements Runnable{
 
         private String msg;
-        private String to;
+        private String to;//
         private String subject;
 
         public void setMsg(String msg) {
