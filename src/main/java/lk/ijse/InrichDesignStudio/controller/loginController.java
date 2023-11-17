@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -11,8 +12,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.InrichDesignStudio.Mail.MailUtil;
 import lk.ijse.InrichDesignStudio.Model.userModel;
 import lk.ijse.InrichDesignStudio.dto.userDto;
+import util.SystemAlert;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +31,7 @@ public class loginController {
     public TextField txtShowPassword;
     public ImageView lblCloseEye;
     public ImageView lblOpenEye;
-    public static String password=null;
+    public static String password = null;
 
     public static String username;
     private userModel uModel = new userModel();
@@ -36,7 +39,7 @@ public class loginController {
 
     public void btnOnLogin(ActionEvent actionEvent) throws IOException {
 
-        username = userNameField.getText();
+       username = userNameField.getText();
         password = txtHidePasword.getText();
 
         //var dto = new userDto(username,password);
@@ -45,8 +48,14 @@ public class loginController {
             if(username != null || password != null){
                 boolean isLogin = uModel.checkCredentials(username,password);
                 if(isLogin){
-                    //new Alert(Alert.AlertType.CONFIRMATION,"Login Succesfully").showAndWait();
+                    new SystemAlert(Alert.AlertType.CONFIRMATION,"Succes","SuccesFully login", ButtonType.OK).showAndWait();
+                    MailUtil mail = new MailUtil();
+                    mail.setMsg("Welcome..! \n\n\tYou are successfully logged  \n\nThank you..!");
+                    mail.setTo(username);
+                    mail.setSubject("System Login");
 
+                    Thread thread = new Thread(mail);
+                    thread.start();
 
                     AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/Dashbord.fxml"));
                     Scene scene = new Scene(anchorPane);
@@ -54,8 +63,12 @@ public class loginController {
                     stage.setScene(scene);
                     stage.setTitle("Dashboard");
                     stage.centerOnScreen();
+
+
+
                 }else {
-                    new Alert(Alert.AlertType.ERROR, "Your Entered Password Or UserName is Wrong !").show();
+                    new SystemAlert(Alert.AlertType.ERROR,"Error","Somehing went wrong!", ButtonType.OK).show();
+                   // new Alert(Alert.AlertType.ERROR, "Your Entered Password Or UserName is Wrong !").show();
 
                     userNameField.clear();
                     txtHidePasword.clear();
@@ -65,7 +78,8 @@ public class loginController {
 
                 if(username.isEmpty())setFocusColorRed(userNameField);
                 if(password.isEmpty())setFocusColorRed(txtHidePasword);
-                new Alert(Alert.AlertType.ERROR, "Please fill All the fields !").showAndWait();
+                //new Alert(Alert.AlertType.ERROR, "Please fill All the fields !").showAndWait();
+                new SystemAlert(Alert.AlertType.ERROR,"Error","Please fill All the fields !", ButtonType.OK).show();
                 resetFieldStyle(userNameField);
                 resetFieldStyle(txtHidePasword);
             }

@@ -5,46 +5,46 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="800.0" prefWidth="1505.0" style="-fx-background-color: #E8E8E8;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.dashboardController">
+<AnchorPane fx:id="pane" prefHeight="850.0" prefWidth="1505.0" style="-fx-background-color: #E8E8E8;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.dashboardController">
    <children>
-      <AnchorPane layoutY="-4.0" prefHeight="812.0" prefWidth="245.0" style="-fx-background-color: white;">
+      <AnchorPane layoutY="-4.0" prefHeight="850.0" prefWidth="245.0" style="-fx-background-color: white;">
          <children>
-            <Pane fx:id="sidepane" layoutY="137.0" prefHeight="674.0" prefWidth="242.0" style="-fx-background-color: #00003f;" styleClass="sidepane" stylesheets="@../styles/style.css">
+            <Pane fx:id="sidepane" layoutY="137.0" prefHeight="719.0" prefWidth="242.0" style="-fx-background-color: #00003f;" styleClass="sidepane" stylesheets="@../styles/style.css">
                <children>
-                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="63.0" onAction="#btnOnDasboard" prefHeight="30.0" prefWidth="242.0" ripplerFill="#f2ecec" text="Dashboard" textFill="#f2eaea">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="108.0" onAction="#btnOnCustomer" prefHeight="30.0" prefWidth="242.0" text="Customers" textFill="#f2eaea">
+                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="63.0" onAction="#btnOnDasboard" prefHeight="30.0" prefWidth="242.0" text="Dashboard" textFill="#f2eaea">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                      <ripplerFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                        <LinearGradient endX="1.0" endY="1.0">
                            <stops>
                               <Stop>
                                  <color>
-                                    <Color red="0.9368420839309692" green="0.9160233736038208" blue="0.9160233736038208" />
+                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
                                  </color>
                               </Stop>
-                              <Stop offset="0.033647375504710635">
+                              <Stop offset="0.34185733512786">
                                  <color>
-                                    <Color red="0.9368420839309692" green="0.9160233736038208" blue="0.9160233736038208" />
+                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
                                  </color>
                               </Stop>
                               <Stop offset="1.0">
                                  <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                    <Color red="1.0" green="0.9882352948188782" blue="0.9882352948188782" />
                                  </color>
                               </Stop>
                            </stops>
-                        </RadialGradient>
+                        </LinearGradient>
                      </ripplerFill>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="108.0" onAction="#btnOnCustomer" prefHeight="30.0" prefWidth="242.0" ripplerFill="#fffcfc" text="Customers" textFill="#f2eaea">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="155.0" onAction="#btnOnEmployee" prefHeight="30.0" prefWidth="242.0" text="Employee" textFill="#f2eaea">
                      <font>
@@ -66,23 +66,18 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutY="354.0" onAction="#btnOnIncome" prefHeight="30.0" prefWidth="242.0" text="Income" textFill="#f2eaea">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutY="398.0" onAction="#btnOnExpenses" prefHeight="30.0" prefWidth="242.0" text="Expenses" textFill="#f2eaea">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
                   <JFXButton buttonType="RAISED" layoutY="642.0" prefHeight="25.0" prefWidth="230.0" text="Log Out" textFill="#f2eaea">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="351.0" onAction="#btnOnFinance" prefHeight="30.0" prefWidth="242.0" text="Finance" textFill="#f2eaea">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
                </children></Pane>
-            <Label layoutX="113.0" layoutY="14.0" prefHeight="19.0" prefWidth="90.0" text="Welcome,">
+            <Label layoutX="113.0" layoutY="14.0" prefHeight="30.0" prefWidth="90.0" text="Welcome,">
                <font>
                   <Font name="Georgia Bold" size="15.0" />
                </font>
@@ -94,6 +89,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="mainPane" layoutX="247.0" layoutY="-1.0" prefHeight="806.0" prefWidth="1250.0" style="-fx-background-color: white;" />
+      <AnchorPane fx:id="mainPane" layoutX="247.0" layoutY="-1.0" prefHeight="850.0" prefWidth="1258.0" style="-fx-background-color: #DBE2E9;" />
    </children>
 </AnchorPane>

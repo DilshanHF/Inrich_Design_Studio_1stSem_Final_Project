@@ -102,3 +102,25 @@ create table inventory_details(
 
 desc user;
 select * from user;
+select * from customer;
+select * from user;
+drop table customer;
+
+ALTER TABLE customer
+    MODIFY COLUMN c_email VARCHAR(155);
+
+Drop TABLE income;
+show tables ;
+
+create table income(
+                       income_id varchar(50)primary key ,
+                       orde_id varchar(50)not null ,
+                       income_type varchar(155)not null,
+                       description varchar(155)not null ,
+                       amount double(40,2)not null,
+                       date date,
+                       constraint foreign key (orde_id)references orders(order_id)on delete cascade on update cascade
+
+
+);
+desc income;

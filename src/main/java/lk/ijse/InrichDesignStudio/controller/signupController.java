@@ -5,12 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.InrichDesignStudio.Model.userModel;
 import lk.ijse.InrichDesignStudio.dto.userDto;
+import util.SystemAlert;
 
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
@@ -57,7 +59,7 @@ public class signupController {
         String password = passField.getText();
         String rePassword = rePassField.getText();
 
-        if(first_name.isEmpty() || last_name.isEmpty() || email.isEmpty()||password.isEmpty()||rePassword.isEmpty()){
+        if(first_name.isEmpty() || last_name.isEmpty() || email.isEmpty()||password.isEmpty()||rePassword.isEmpty()){//String.valueOf(varibale).isEmpty
             if (first_name.isEmpty()) setFocusColorRed(fNameField);
             if (last_name.isEmpty()) setFocusColorRed(lNameField);
             if (email.isEmpty()) setFocusColorRed(EmalField);
@@ -76,6 +78,7 @@ public class signupController {
                 boolean isSaved = uModel.saveUser(dto);
                 if (isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Account Succesfully created").showAndWait();
+
                     clearFields();
                     resetFieldStyle(fNameField);
                     resetFieldStyle(lNameField);

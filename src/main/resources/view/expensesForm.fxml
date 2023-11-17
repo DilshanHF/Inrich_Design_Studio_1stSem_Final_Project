@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" prefHeight="845.0" prefWidth="1250.0" style="-fx-background-color: #DBE2E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.expensesController">
+   <children>
+      <Pane prefHeight="55.0" prefWidth="1250.0" style="-fx-background-color: #00003f;">
+         <children>
+            <Label layoutX="14.0" prefHeight="55.0" prefWidth="327.0" text="Financial" textFill="#fafafc">
+               <font>
+                  <Font name="Georgia Bold" size="28.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="1045.0" layoutY="23.0" onAction="#btnOnExpensesDetails" prefHeight="26.0" prefWidth="198.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Expenses Details" textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="817.0" layoutY="23.0" onAction="#btnOnIncomeDetails" prefHeight="26.0" prefWidth="208.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Income Details" textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
+         </children>
+      </Pane>
+      <AnchorPane layoutX="18.0" layoutY="72.0" prefHeight="756.0" prefWidth="511.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <Label layoutX="14.0" prefHeight="42.0" prefWidth="188.0" text="Expenses Details" textFill="#00003f">
+               <font>
+                  <Font name="Georgia Bold" size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtId" layoutX="27.0" layoutY="99.0" prefHeight="31.0" prefWidth="414.0" promptText="Expenses Id" style="-fx-background-color: white;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtDescription" layoutX="27.0" layoutY="171.0" prefHeight="31.0" prefWidth="414.0" promptText="Description" style="-fx-background-color: white;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtType" layoutX="27.0" layoutY="249.0" prefHeight="31.0" prefWidth="414.0" promptText="Type" style="-fx-background-color: white;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtAmount" layoutX="27.0" layoutY="346.0" prefHeight="31.0" prefWidth="414.0" promptText="Amount" style="-fx-background-color: white;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Line endX="241.79998779296875" layoutX="133.0" layoutY="129.0" startX="-100.0" />
+            <Line endX="241.79998779296875" layoutX="132.0" layoutY="201.0" startX="-100.0" />
+            <Line endX="241.79998779296875" layoutX="132.0" layoutY="280.0" startX="-100.0" />
+            <Line endX="241.79998779296875" layoutX="132.0" layoutY="377.0" startX="-100.0" />
+            <Line endX="241.79998779296875" layoutX="132.0" layoutY="455.0" startX="-100.0" />
+            <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="553.0" onAction="#btnOnAddExpenses" prefHeight="31.0" prefWidth="149.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Add  " textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.24705882370471954" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="181.0" layoutY="553.0" onAction="#btnOnUpdateExpenses" prefHeight="31.0" prefWidth="149.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Update" textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.24705882370471954" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="347.0" layoutY="553.0" onAction="#btnOnDeleteExpenses" prefHeight="31.0" prefWidth="149.0" style="-fx-background-color: red; -fx-background-radius: 25;" text="Delete" textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.24705882370471954" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
+            <DatePicker fx:id="txtDate" layoutX="32.0" layoutY="428.0" prefHeight="26.0" prefWidth="343.0" promptText="Date" style="-fx-background-color: white;" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="552.0" layoutY="75.0" prefHeight="756.0" prefWidth="688.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <TableView fx:id="tableView" layoutX="14.0" layoutY="186.0" prefHeight="556.0" prefWidth="667.0" stylesheets="@../styles/style.css">
+               <columns>
+                  <TableColumn prefWidth="120.0" text="Expenses Id" />
+                  <TableColumn prefWidth="149.5999755859375" text="Description" />
+                  <TableColumn prefWidth="132.79998779296875" text="Type" />
+                  <TableColumn prefWidth="132.79998779296875" text="Amount" />
+                  <TableColumn prefWidth="132.79998779296875" text="Date" />
+               </columns>
+            </TableView>
+            <AnchorPane layoutX="14.0" layoutY="104.0" prefHeight="49.0" prefWidth="462.0" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
+               <children>
+                  <TextField layoutX="78.0" prefHeight="55.0" prefWidth="392.0" promptText="Search Expenses Id" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/search.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Label layoutX="14.0" layoutY="6.0" prefHeight="42.0" prefWidth="180.0" text="View Expenses" textFill="#00003f">
+               <font>
+                  <Font name="Georgia Bold" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
