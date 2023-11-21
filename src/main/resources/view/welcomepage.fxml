@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.welcomepageController">
@@ -16,57 +14,11 @@
             <Image url="@../assets/welcome.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="logBtn" buttonType="RAISED" layoutX="67.0" layoutY="344.0" onAction="#btnOnLogin" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="LOG IN" textFill="#f4eeee">
-         <ripplerFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.2530282637954239">
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </ripplerFill>
+      <ProgressBar fx:id="progress" layoutX="68.0" layoutY="551.0" prefHeight="18.0" prefWidth="700.0" progress="0.0" stylesheets="@../styles/progressbar.css" />
+      <Label fx:id="label" layoutX="68.0" layoutY="516.0" prefHeight="18.0" prefWidth="98.0" text="Loading...">
          <font>
-            <Font name="Calibri Bold" size="13.0" />
+            <Font name="Georgia Bold" size="16.0" />
          </font>
-      </JFXButton>
-      <JFXButton fx:id="signBtn" buttonType="RAISED" layoutX="68.0" layoutY="416.0" onAction="#btnOnSignup" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="SIGN UP" textFill="#f4ecec">
-         <ripplerFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.2530282637954239">
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </ripplerFill>
-         <font>
-            <Font name="Calibri Bold" size="13.0" />
-         </font>
-      </JFXButton>
+      </Label>
    </children>
 </AnchorPane>

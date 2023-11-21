@@ -46,17 +46,18 @@ create table orders(
 );
 create table item(
                      item_code varchar (35) primary key ,
-                     item_type varchar(20) not null ,
-                     category varchar(55)not null ,
-                     qty_on_hand int not null,
+                     item_name varchar(155) not null ,
+                     Wood_type varchar(20) not null ,
+
                      unit_price  double(40,2)
+
 );
 create table order_detail(
-                             item_id varchar (35) ,
+                             item_code varchar (35) ,
                              order_id varchar(35) ,
                              qty int not null ,
                              amount double(40,2) not null,
-                             constraint foreign key (item_id) references item (item_code) on delete cascade on UPDATE cascade ,
+                             constraint foreign key (item_code ) references item (item_code) on delete cascade on UPDATE cascade ,
                              constraint foreign key (order_id) references orders (order_id) on delete cascade on UPDATE cascade
 );
 drop table user;
@@ -80,7 +81,7 @@ create table income(
 );
 create table expense(
     expense_id varchar(100) primary key,
-    date date,
+    date date not null ,
     descripton varchar(155)not null ,
     type varchar(55),
     amount double(55,2)not null
@@ -94,10 +95,11 @@ create table inventory(
     constraint foreign key (item_code)references item(item_code)on delete cascade on update cascade
 );
 create table inventory_details(
-    item_code varchar(55)not null ,
-    inven_id varchar(55)not null,
-    constraint foreign key (inven_id)references inventory(inventory_id)on delete cascade on update cascade ,
-    constraint foreign key (item_code)references item(item_code)on delete cascade on update cascade
+    order_id varchar(55)not null ,
+    item_code varchar(155)not null ,
+    Qty int not null ,
+    handOverDate date not null
+
 );
 
 desc user;
@@ -124,3 +126,17 @@ create table income(
 
 );
 desc income;
+drop table expense;
+desc expense;
+drop table item;
+drop table order_detail;
+drop table inventory;
+drop table inventory_details;
+show tables;
+desc item;
+
+alter table orders drop column description;
+
+desc orders;
+drop table item;
+

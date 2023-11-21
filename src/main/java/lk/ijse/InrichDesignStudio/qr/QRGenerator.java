@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
-public class QRGenerator {
+public class  QRGenerator {
 
     public static boolean generateQrCode(String text, int width, int height,String filepath) throws WriterException {
         QRCodeWriter qc = new QRCodeWriter();

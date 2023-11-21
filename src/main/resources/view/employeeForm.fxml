@@ -16,7 +16,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="mainPane" prefHeight="845.0" prefWidth="1250.0" style="-fx-background-color: #DBE2E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.employeeController">
    <children>
       <Pane prefHeight="55.0" prefWidth="1250.0" style="-fx-background-color: #00003f;">
@@ -26,7 +25,7 @@
                   <Font name="Georgia Bold" size="28.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" layoutX="848.0" layoutY="23.0" onAction="#btnOnAttendance" prefHeight="26.0" prefWidth="208.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Mark Attendance" textFill="#ece6e6">
+            <JFXButton buttonType="RAISED" layoutX="833.0" layoutY="23.0" onAction="#btnOnAttendance" prefHeight="26.0" prefWidth="208.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Mark Attendance" textFill="#ece6e6">
                <font>
                   <Font name="Georgia Bold" size="17.0" />
                </font>
@@ -204,13 +203,13 @@
       </AnchorPane>
       <AnchorPane layoutX="552.0" layoutY="75.0" prefHeight="756.0" prefWidth="688.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <TableView layoutX="14.0" layoutY="186.0" prefHeight="556.0" prefWidth="667.0" stylesheets="@../styles/style.css">
+            <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="186.0" prefHeight="556.0" prefWidth="667.0" stylesheets="@../styles/style.css">
               <columns>
-                <TableColumn prefWidth="120.0" text="Employee Id" />
-                <TableColumn prefWidth="149.5999755859375" text="Name" />
-                  <TableColumn prefWidth="132.79998779296875" text="Address" />
-                  <TableColumn prefWidth="132.79998779296875" text="Contact" />
-                  <TableColumn prefWidth="132.79998779296875" text="NIC" />
+                <TableColumn fx:id="colEmpId" prefWidth="120.0" text="Employee Id" />
+                <TableColumn fx:id="colEmpName" prefWidth="149.5999755859375" text="Name" />
+                  <TableColumn fx:id="colEmpAdd" prefWidth="132.79998779296875" text="Address" />
+                  <TableColumn fx:id="colEmpCon" prefWidth="132.79998779296875" text="Contact" />
+                  <TableColumn fx:id="colEmpNic" prefWidth="132.79998779296875" text="NIC" />
               </columns>
             </TableView>
             <AnchorPane layoutX="14.0" layoutY="104.0" prefHeight="49.0" prefWidth="462.0" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">

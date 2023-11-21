@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -75,31 +74,17 @@
             </JFXButton>
          </children>
       </Pane>
-      <AnchorPane layoutX="24.0" layoutY="94.0" prefHeight="212.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <AnchorPane layoutX="14.0" layoutY="78.0" prefHeight="639.0" prefWidth="1210.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <Label layoutX="30.0" prefHeight="42.0" prefWidth="188.0" text="Income Details" textFill="#00003f">
-               <font>
-                  <Font name="Georgia Bold" size="19.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtId" layoutX="23.0" layoutY="56.0" prefHeight="26.0" prefWidth="340.0" promptText="Income Id" style="-fx-background-radius: 25;" />
-            <TextField fx:id="txtOrderId" layoutX="460.0" layoutY="56.0" prefHeight="26.0" prefWidth="377.0" promptText="Order Id" style="-fx-background-radius: 25;" />
-            <TextField fx:id="txtType" layoutX="23.0" layoutY="106.0" prefHeight="26.0" prefWidth="340.0" promptText="Type" style="-fx-background-radius: 25;" />
-            <TextField fx:id="txtDescription" layoutX="460.0" layoutY="106.0" prefHeight="26.0" prefWidth="378.0" promptText="Description" style="-fx-background-radius: 25;" />
-            <TextField fx:id="txtAmount" layoutX="23.0" layoutY="163.0" prefHeight="26.0" prefWidth="340.0" promptText="Amount" style="-fx-background-radius: 25;" />
-            <DatePicker fx:id="txtDate" layoutX="460.0" layoutY="164.0" promptText="Date" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="24.0" layoutY="331.0" prefHeight="509.0" prefWidth="1182.0" style="-fx-background-color: white; -fx-background-radius: 25;">
-         <children>
-            <TableView fx:id="tableview" layoutX="21.0" layoutY="100.0" prefHeight="395.0" prefWidth="1140.0" stylesheets="@../styles/style.css">
+            <TableView fx:id="tblIncome" layoutX="31.0" layoutY="98.0" prefHeight="519.0" prefWidth="1148.0" stylesheets="@../styles/style.css">
                <columns>
-                  <TableColumn prefWidth="136.79998397827148" text="Income Id" />
-                  <TableColumn minWidth="0.0" prefWidth="162.3999786376953" text="Order Id" />
-                  <TableColumn prefWidth="192.7999267578125" text="Type" />
-                  <TableColumn minWidth="0.0" prefWidth="325.5999755859375" text="Description" />
-                  <TableColumn prefWidth="165.5999755859375" text="Amount" />
-                  <TableColumn prefWidth="156.0001220703125" text="Date" />
+                  <TableColumn fx:id="colId" prefWidth="183.99999618530273" text="Income Id" />
+                  <TableColumn fx:id="colOrderId" minWidth="0.0" prefWidth="191.2000274658203" text="Order Id" />
+                  <TableColumn fx:id="colType" prefWidth="252.00003051757812" text="Type" />
+                  <TableColumn fx:id="colAmount" prefWidth="271.199951171875" text="Amount" />
+                  <TableColumn fx:id="colDate" prefWidth="250.4000244140625" text="Date" />
+                  <TableColumn fx:id="colAmount1" prefWidth="165.5999755859375" text="Amount" />
+                  <TableColumn fx:id="colAmount2" prefWidth="165.5999755859375" text="Amount" />
                </columns>
             </TableView>
             <AnchorPane layoutX="26.0" layoutY="14.0" prefHeight="42.0" prefWidth="451.0" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
@@ -118,68 +103,5 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <JFXButton buttonType="RAISED" layoutX="1067.0" layoutY="115.0" onAction="#btnOnSaveIncome" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Add  " textFill="#ece6e6">
-         <font>
-            <Font name="Georgia Bold" size="17.0" />
-         </font>
-         <ripplerFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color blue="0.24705882370471954" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </ripplerFill>
-      </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="1067.0" layoutY="168.0" onAction="#btnOnUpdateIncome" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Update" textFill="#ece6e6">
-         <font>
-            <Font name="Georgia Bold" size="17.0" />
-         </font>
-         <ripplerFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color blue="0.24705882370471954" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </ripplerFill>
-      </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="1066.0" layoutY="227.0" onAction="#btnOnDeleteIncome" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: red; -fx-background-radius: 25;" text="Delete " textFill="#ece6e6">
-         <font>
-            <Font name="Georgia Bold" size="17.0" />
-         </font>
-         <ripplerFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color blue="0.24705882370471954" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </ripplerFill>
-      </JFXButton>
    </children>
 </AnchorPane>
