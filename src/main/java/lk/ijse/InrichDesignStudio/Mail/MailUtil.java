@@ -9,8 +9,9 @@ public class MailUtil implements Runnable{
         private String msg;
         private String to;//
         private String subject;
+    private boolean successful;
 
-        public void setMsg(String msg) {
+    public void setMsg(String msg) {
             this.msg = msg;
         }//
 
@@ -36,7 +37,7 @@ public class MailUtil implements Runnable{
 
 
             Session session = Session.getDefaultInstance(properties, new Authenticator() {
-                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication("dilshanfonseka76@gmail.com", "amcc todb acra cesc");  // have to change some settings in SMTP
                 }
             });
@@ -65,4 +66,7 @@ public class MailUtil implements Runnable{
             }
     }
 
+    public boolean isSuccessful() {
+        return successful;
+    }
 }

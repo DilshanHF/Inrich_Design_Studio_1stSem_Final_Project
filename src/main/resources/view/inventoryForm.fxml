@@ -179,7 +179,7 @@
                   <TableColumn fx:id="colName" prefWidth="149.5999755859375" text="Item Name" />
                   <TableColumn fx:id="colWood" prefWidth="132.79998779296875" text="Wood Type" />
                   <TableColumn fx:id="colPrize" prefWidth="132.79998779296875" text="Unit Prise" />
-                  <TableColumn fx:id="colAction" prefWidth="132.79998779296875" text="Action" />
+                  <TableColumn fx:id="colAction" prefWidth="132.79998779296875" text="Status" />
                </columns>
             </TableView>
             <AnchorPane layoutX="14.0" layoutY="104.0" prefHeight="49.0" prefWidth="462.0" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">

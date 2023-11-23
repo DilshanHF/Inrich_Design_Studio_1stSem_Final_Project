@@ -34,4 +34,16 @@ public class userModel {
         return resultSet.next();
 
     }
+
+    public boolean exitUser(String email) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT email FROM customer WHERE email = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, email);
+
+        ResultSet resultSet =pstm.executeQuery();
+        return resultSet.next();
+
+    }
 }

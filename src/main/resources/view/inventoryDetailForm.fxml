@@ -1,14 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.InrichDesignStudio.controller.inventoryDetailController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="mainPane" prefHeight="845.0" prefWidth="1250.0" style="-fx-background-color: #DBE2E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.inventoryDetailController">
+   <children>
+      <Pane prefHeight="55.0" prefWidth="1250.0" style="-fx-background-color: #00003f;">
+         <children>
+            <Label layoutX="14.0" prefHeight="55.0" prefWidth="327.0" text="Inventory Dashboard" textFill="#fafafc">
+               <font>
+                  <Font name="Georgia Bold" size="28.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="1045.0" layoutY="23.0" onAction="#btnOnInventoryDetails" prefHeight="26.0" prefWidth="198.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Inventory Details" textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="820.0" layoutY="23.0" onAction="#btnOnItem" prefHeight="26.0" prefWidth="208.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Items" textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
+         </children>
+      </Pane>
+      <AnchorPane layoutX="14.0" layoutY="101.0" prefHeight="616.0" prefWidth="1210.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <TableView fx:id="tblInventory" layoutX="31.0" layoutY="72.0" prefHeight="546.0" prefWidth="1148.0" stylesheets="@../styles/style.css">
+               <columns>
+                  <TableColumn fx:id="colOrderId" prefWidth="183.99999618530273" text="Order Id" />
+                  <TableColumn fx:id="colItemCode" minWidth="0.0" prefWidth="191.2000274658203" text="Item Code" />
+                  <TableColumn fx:id="colQty" prefWidth="252.00003051757812" text="Qty" />
+                  <TableColumn fx:id="colDate" prefWidth="323.199951171875" text="Hand Over Date" />
+                  <TableColumn fx:id="colStatus" prefWidth="191.20013427734375" text="Status" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <JFXButton layoutX="945.0" layoutY="767.0" onAction="#btnOnReport" prefHeight="55.0" prefWidth="255.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Get Report">
+         <font>
+            <Font name="Georgia Bold" size="21.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </JFXButton>
+   </children>
 </AnchorPane>

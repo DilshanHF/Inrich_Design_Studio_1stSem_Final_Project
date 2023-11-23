@@ -63,8 +63,9 @@ public class inventoryController implements Initializable {
 
     itemModel iModel = new itemModel();
 
-    public void btnOnInventoryDetails(ActionEvent actionEvent) {
-
+    public void btnOnInventoryDetails(ActionEvent actionEvent) throws IOException {
+        mainPane.getChildren().clear();
+        mainPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/inventoryDetailForm.fxml")));
 
     }
 

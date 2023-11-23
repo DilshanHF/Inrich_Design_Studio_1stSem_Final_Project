@@ -140,3 +140,5 @@ alter table orders drop column description;
 desc orders;
 drop table item;
 
+alter table income drop column description;
+

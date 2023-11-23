@@ -91,7 +91,7 @@ public class customerModel {
     public customerDto searchCustomer(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection ();
 
-        String sql = "SELECT * FROM customer WHERE id = ?";
+        String sql = "SELECT * FROM customer WHERE customer_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, id);
 
@@ -108,6 +108,21 @@ public class customerModel {
             dto = new customerDto(cus_id, cus_name, cus_address, cus_tel,cus_mail);
         }
         return dto;
+
+    }
+
+    public String getTotalCustomers() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT COUNT(*) FROM customer";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        if(resultSet.next()) {
+            return resultSet.getString(1);
+        }
+        return null;
 
     }
 }

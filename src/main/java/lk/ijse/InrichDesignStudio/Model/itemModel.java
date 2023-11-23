@@ -85,4 +85,28 @@ public class itemModel {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public itemDto searchItem(String code) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM item WHERE item_code = ?";
+
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, code);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        itemDto dto = null;
+
+        if(resultSet.next()) {
+
+            String iCode = resultSet.getString(1);
+            String iName = resultSet.getString(2);
+            String iType = resultSet.getString(3);
+            double iPrice = resultSet.getDouble(4);
+
+            dto = new itemDto(iCode,iName,iType,iPrice);
+
+        }
+        return dto;
+    }
 }

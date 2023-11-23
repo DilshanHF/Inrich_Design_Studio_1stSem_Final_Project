@@ -78,23 +78,21 @@
          <children>
             <TableView fx:id="tblIncome" layoutX="31.0" layoutY="98.0" prefHeight="519.0" prefWidth="1148.0" stylesheets="@../styles/style.css">
                <columns>
-                  <TableColumn fx:id="colId" prefWidth="183.99999618530273" text="Income Id" />
-                  <TableColumn fx:id="colOrderId" minWidth="0.0" prefWidth="191.2000274658203" text="Order Id" />
+                  <TableColumn fx:id="colIvId" prefWidth="180.79998397827148" text="Income Id" />
+                  <TableColumn fx:id="colOrderId" minWidth="0.0" prefWidth="195.2000274658203" text="Order Id" />
                   <TableColumn fx:id="colType" prefWidth="252.00003051757812" text="Type" />
                   <TableColumn fx:id="colAmount" prefWidth="271.199951171875" text="Amount" />
                   <TableColumn fx:id="colDate" prefWidth="250.4000244140625" text="Date" />
-                  <TableColumn fx:id="colAmount1" prefWidth="165.5999755859375" text="Amount" />
-                  <TableColumn fx:id="colAmount2" prefWidth="165.5999755859375" text="Amount" />
                </columns>
             </TableView>
-            <AnchorPane layoutX="26.0" layoutY="14.0" prefHeight="42.0" prefWidth="451.0" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
+            <AnchorPane layoutX="26.0" layoutY="14.0" prefHeight="31.0" prefWidth="470.0" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
                <children>
-                  <TextField layoutX="78.0" prefHeight="55.0" prefWidth="392.0" promptText="Search Income Id or Order Id" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
+                  <TextField layoutX="78.0" prefHeight="38.0" prefWidth="392.0" promptText="Search Income Id or Order Id" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="29.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/search.png" />
                      </image>

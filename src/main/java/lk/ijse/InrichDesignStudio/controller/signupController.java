@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.InrichDesignStudio.Model.userModel;
 import lk.ijse.InrichDesignStudio.dto.userDto;
+import util.Regex;
 import util.SystemAlert;
 
 import javax.swing.text.html.ImageView;
@@ -60,39 +61,52 @@ public class signupController {
         String rePassword = rePassField.getText();
 
         if(first_name.isEmpty() || last_name.isEmpty() || email.isEmpty()||password.isEmpty()||rePassword.isEmpty()){//String.valueOf(varibale).isEmpty
-            if (first_name.isEmpty()) setFocusColorRed(fNameField);
-            if (last_name.isEmpty()) setFocusColorRed(lNameField);
-            if (email.isEmpty()) setFocusColorRed(EmalField);
+            if (Regex.getNamePattern().matcher(fNameField.getText()).matches()) setFocusColorRed(fNameField);
+            if (email.isEmpty()) setFocusColorRed(passField);
+            if (Regex.getNamePattern().matcher(lNameField.getText()).matches()) setFocusColorRed(lNameField);
+            if (Regex.getEmailPattern().matcher(EmalField.getText()).matches()) setFocusColorRed(EmalField);
             if (password.isEmpty()) setFocusColorRed(passField);
             if (rePassword.isEmpty()) setFocusColorRed(rePassField);
             new Alert(Alert.AlertType.ERROR,"Cannot Empty Field ").showAndWait();
            // resetFieldStyle(fNameField);
             return;
         }
+        boolean isExist =false;
+        try {
+            isExist = uModel.exitUser(email);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if(!isExist) {
 
-        if(password.equals(rePassword)){
 
-            var dto = new userDto(first_name,last_name,email,password);
+            if (password.equals(rePassword)) {
 
-            try {
-                boolean isSaved = uModel.saveUser(dto);
-                if (isSaved){
-                    new Alert(Alert.AlertType.CONFIRMATION,"Account Succesfully created").showAndWait();
+                var dto = new userDto(first_name, last_name, email, password);
 
-                    clearFields();
-                    resetFieldStyle(fNameField);
-                    resetFieldStyle(lNameField);
-                    resetFieldStyle(EmalField);
-                    resetFieldStyle(passField);
-                    resetFieldStyle(rePassField);
+                try {
+                    boolean isSaved = uModel.saveUser(dto);
+                    if (isSaved) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Account Succesfully created").showAndWait();
+
+                        clearFields();
+                        resetFieldStyle(fNameField);
+                        resetFieldStyle(lNameField);
+                        resetFieldStyle(EmalField);
+                        resetFieldStyle(passField);
+                        resetFieldStyle(rePassField);
+                    }
+                } catch (SQLException e) {
+                    new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
                 }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
-            }
 
-        }else {
-            setFocusColorRed(rePassField);
-            new Alert(Alert.AlertType.ERROR,"Doesn't Match Password").showAndWait();
+            } else {
+                setFocusColorRed(rePassField);
+                new Alert(Alert.AlertType.ERROR, "Doesn't Match Password").showAndWait();
+            }
+        }else{
+            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Customer is already exist", ButtonType.OK).show();
+            setFocusColorRed(EmalField);
         }
 
     }

@@ -101,4 +101,19 @@ public class employeeModel {
         pstm.setString(1,id);
         return pstm.executeUpdate()>0;
     }
+
+    public String getTotalEmployees() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT COUNT(e_id) FROM employee";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return resultSet.getString(1);
+
+        }
+        return null;
+
+    }
 }

@@ -86,4 +86,17 @@ public class expensesModel {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public double getTotalExpenses() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT SUM(amount) FROM expense";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        if(resultSet.next()){
+            return resultSet.getDouble(1);
+        }
+        return 0;
+    }
 }
