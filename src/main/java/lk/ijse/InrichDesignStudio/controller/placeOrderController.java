@@ -21,9 +21,11 @@ import lk.ijse.InrichDesignStudio.dto.placeOrderDto;
 import util.SystemAlert;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,6 +95,9 @@ public class placeOrderController {
     private TextField txtPaymentType;
 
     @FXML
+    private JFXComboBox<String> cmbPaymentType;
+
+    @FXML
     private TextField txtQty;
 
     private incomeModel inModel = new incomeModel();
@@ -111,6 +116,14 @@ public class placeOrderController {
         setDate();
         loadCustomerIds();
         loadItemCodes();
+        loadPaymentTypes();
+    }
+
+    private void loadPaymentTypes() {
+        List<String> types = Arrays.asList("Cash","Card","Cheque");
+        ObservableList<String> typeList = FXCollections.observableArrayList(types);
+        cmbPaymentType.setItems(typeList);
+
     }
 
     private void setCellValueFactory() {
@@ -296,7 +309,7 @@ public class placeOrderController {
         String customerId = cmbCustomerId.getValue();
         String invoiceId = lblInvoiceId.getText();
         LocalDate handOverdate = txtDate.getValue();
-        String type = txtPaymentType.getText();
+        String type = cmbPaymentType.getValue();
         double amount = Double.parseDouble(lblTotal.getText());
         String email = lblCustomerEmail.getText();
         String name = lblCustomerName.getText();
@@ -343,6 +356,7 @@ public class placeOrderController {
         txtPaymentType.setText("");
         cmbCustomerId.getSelectionModel().clearSelection();
         cmbItem.getSelectionModel().clearSelection();
+        cmbPaymentType.getSelectionModel().clearSelection();
     }
 
     private void sendMail(String customerId, String name , String email,String orderId) {
@@ -370,4 +384,6 @@ public class placeOrderController {
     }
 
 
+    public void cmbTypeOnAction(ActionEvent actionEvent) {
+    }
 }

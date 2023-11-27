@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,7 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="845.0" prefWidth="1250.0" style="-fx-background-color: #DBE2E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.attendanceController">
+<AnchorPane fx:id="mainPane" prefHeight="845.0" prefWidth="1250.0" style="-fx-background-color: #DBE2E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.attendanceDetailsController">
    <children>
       <Pane prefHeight="55.0" prefWidth="1250.0" style="-fx-background-color: #00003f;">
          <children>
@@ -23,7 +25,7 @@
                   <Font name="Georgia Bold" size="28.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" layoutX="833.0" layoutY="23.0" onAction="#btnOnAttendance" prefHeight="26.0" prefWidth="208.0" style="-fx-background-color: white; -fx-background-radius: 25;" text="Mark Attendance" textFill="#ece6e6">
+            <JFXButton buttonType="RAISED" layoutX="833.0" layoutY="23.0" onAction="#btnOnAttendance" prefHeight="26.0" prefWidth="208.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Mark Attendance" textFill="#ece6e6">
                <font>
                   <Font name="Georgia Bold" size="17.0" />
                </font>
@@ -52,7 +54,7 @@
                   </LinearGradient>
                </ripplerFill>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="1045.0" layoutY="23.0" onAction="#btnOnAttendanceDetails" prefHeight="26.0" prefWidth="198.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Attendance Details" textFill="#ece6e6">
+            <JFXButton buttonType="RAISED" layoutX="1045.0" layoutY="23.0" onAction="#btnOnAttendanceDetails" prefHeight="26.0" prefWidth="198.0" style="-fx-background-color: white; -fx-background-radius: 25;" text="Attendance Details" textFill="#ece6e6">
                <font>
                   <Font name="Georgia Bold" size="17.0" />
                </font>
@@ -102,77 +104,43 @@
             </JFXButton>
          </children>
       </Pane>
-      <AnchorPane layoutX="14.0" layoutY="83.0" prefHeight="74.0" prefWidth="326.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <AnchorPane layoutX="27.0" layoutY="181.0" prefHeight="648.0" prefWidth="814.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <Label fx:id="lblTime" layoutX="118.0" layoutY="45.0" prefHeight="38.0" prefWidth="114.0" text="08:16:45" textAlignment="RIGHT" textFill="#013a63">
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblDate" layoutX="118.0" layoutY="15.0" prefHeight="38.0" prefWidth="150.0" text="23/11/2023" textAlignment="RIGHT" textFill="#013a63">
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-            </Label>
-            <Label layoutX="41.0" layoutY="22.0" prefHeight="18.0" prefWidth="86.0" text="Date :" textFill="#03050b">
-               <font>
-                  <Font name="Georgia Bold" size="22.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <JFXButton buttonType="RAISED" layoutX="964.0" layoutY="88.0" onAction="#QrScanOnBtn" prefHeight="64.0" prefWidth="262.0" style="-fx-background-color: #66eda7; -fx-background-radius: 25;" text="         Scan QR">
-         <font>
-            <Font name="Georgia Bold" size="26.0" />
-         </font>
-         <ripplerFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.031578946858644485" green="0.027953216806054115" blue="0.027953216806054115" />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.006729475100942127">
-                     <color>
-                        <Color red="0.031578946858644485" green="0.027953216806054115" blue="0.027953216806054115" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </ripplerFill>
-      </JFXButton>
-      <ImageView fitHeight="55.0" fitWidth="72.0" layoutX="984.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/icons8-qr-code-64.png" />
-         </image>
-      </ImageView>
-      <AnchorPane layoutX="27.0" layoutY="213.0" prefHeight="527.0" prefWidth="1182.0" style="-fx-background-color: white; -fx-background-radius: 25;">
-         <children>
-            <TableView fx:id="tblEmployee" layoutX="30.0" layoutY="25.0" prefHeight="475.0" prefWidth="1110.0" stylesheets="@../styles/style.css">
+            <TableView fx:id="tblEmployee" layoutX="30.0" layoutY="25.0" prefHeight="475.0" prefWidth="765.0" stylesheets="@../styles/style.css">
                <columns>
-                  <TableColumn fx:id="colEmpId" prefWidth="232.0000114440918" text="Employee Id" />
-                  <TableColumn fx:id="colEmpName" prefWidth="276.0" text="Name" />
-                  <TableColumn fx:id="colEmpCon" prefWidth="289.5999755859375" text="NIC" />
-                  <TableColumn fx:id="colEmpNic" prefWidth="304.80010986328125" text="Status" />
+                  <TableColumn fx:id="colEmpId" prefWidth="165.60002899169922" text="Employee Id" />
+                  <TableColumn fx:id="colEmpName" prefWidth="171.199951171875" text="Name" />
+                  <TableColumn fx:id="colEmpCon" prefWidth="152.80001831054688" text="NIC" />
+                  <TableColumn fx:id="colEmpNic" prefWidth="272.00006103515625" text="Status" />
                </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <JFXButton layoutX="952.0" layoutY="773.0" onAction="#QrScanOnBtn" prefHeight="48.0" prefWidth="274.0" style="-fx-background-color: #66eda7; -fx-background-radius: 25;" text="             Mark Attendance">
-         <font>
-            <Font name="Georgia Bold" size="20.0" />
-         </font>
-      </JFXButton>
-      <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="984.0" layoutY="778.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/icons8-checked-checkbox-48.png" />
-         </image>
-      </ImageView>
+      <DatePicker layoutX="61.0" layoutY="96.0" prefHeight="37.0" prefWidth="296.0" promptText="Date" style="-fx-background-color: white;" />
+      <AnchorPane layoutX="869.0" layoutY="593.0" prefHeight="232.0" prefWidth="368.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <JFXComboBox fx:id="cmbEmployeeId" focusColor="#27282b" layoutX="16.0" layoutY="62.0" onAction="#cmbOnAction" prefHeight="26.0" prefWidth="336.0" promptText="Employee" unFocusColor="#2e2a2a" />
+            <Label layoutX="20.0" layoutY="21.0" prefHeight="30.0" prefWidth="237.0" text="Generate QR Code" textFill="#00003f">
+               <font>
+                  <Font name="Georgia Bold" size="24.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="20.0" layoutY="170.0" onAction="#btnOnGetQR" prefHeight="48.0" prefWidth="198.0" style="-fx-background-color: #6ec297; -fx-background-radius: 25;" text="            Get QR Code" textFill="#f4f2f2">
+               <font>
+                  <Font name="Georgia Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="43.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons8-qr-code-64.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblName" layoutX="20.0" layoutY="116.0" prefHeight="18.0" prefWidth="178.0" text="Dilshan Fonseka">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -23,50 +23,24 @@
          <children>
             <Pane fx:id="sidepane" layoutY="137.0" prefHeight="719.0" prefWidth="242.0" style="-fx-background-color: #00003f;" styleClass="sidepane" stylesheets="@../styles/style.css">
                <children>
-                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="63.0" onAction="#btnOnDasboard" prefHeight="30.0" prefWidth="242.0" text="Dashboard" textFill="#f2eaea">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <ripplerFill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="0.34185733512786">
-                                 <color>
-                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="0.9882352948188782" blue="0.9882352948188782" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </ripplerFill>
-                  </JFXButton>
                   <JFXButton buttonType="RAISED" layoutY="114.0" onAction="#btnOnCustomer" prefHeight="30.0" prefWidth="242.0" ripplerFill="#fffcfc" text="Customers" textFill="#f2eaea">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="165.0" onAction="#btnOnEmployee" prefHeight="30.0" prefWidth="242.0" text="Employee" textFill="#f2eaea">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutY="219.0" onAction="#btnOnOrders" prefHeight="30.0" prefWidth="242.0" text="Orders" textFill="#f2eaea">
+                  <JFXButton buttonType="RAISED" layoutY="221.0" onAction="#btnOnOrders" prefHeight="30.0" prefWidth="242.0" text="Orders" textFill="#f2eaea">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" layoutY="286.0" onAction="#btnOnInventory" prefHeight="30.0" prefWidth="242.0" text="Inventory" textFill="#f2eaea">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" layoutY="642.0" onAction="#btnOnLogOut" prefHeight="25.0" prefWidth="230.0" text="Log Out" textFill="#f2eaea">
@@ -92,9 +66,65 @@
                   </JFXButton>
                   <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="351.0" onAction="#btnOnFinance" prefHeight="30.0" prefWidth="242.0" text="Finance" textFill="#f2eaea">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="63.0" onAction="#btnOnDasboard" prefHeight="38.0" prefWidth="242.0" text="Dashboard" textFill="#f2eaea">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <ripplerFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.34185733512786">
+                                 <color>
+                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="0.9882352948188782" blue="0.9882352948188782" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </ripplerFill>
+                  </JFXButton>
+                  <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="14.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/img_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="23.0" fitWidth="38.0" layoutX="18.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-customer-40.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="15.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-employee-48.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="19.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-delivery-box-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="34.0" fitWidth="30.0" layoutX="19.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-furniture-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="22.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-coins-64.png" />
+                     </image>
+                  </ImageView>
                </children></Pane>
             <Label layoutX="67.0" layoutY="44.0" prefHeight="30.0" prefWidth="90.0" text="Welcome,">
                <font>
@@ -118,7 +148,7 @@
             <Group layoutX="68.0" layoutY="13.0">
                <children>
                   <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="138.0" layoutX="-27.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="353.0" />
-                  <Label layoutX="25.0" layoutY="100.0" prefHeight="38.0" prefWidth="202.0" text="Total Employees" textFill="#00003f">
+                  <Label layoutX="25.0" layoutY="101.0" prefHeight="38.0" prefWidth="202.0" text="Total Employees" textFill="#00003f">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>

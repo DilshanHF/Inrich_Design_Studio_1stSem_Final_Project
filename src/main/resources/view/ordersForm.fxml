@@ -101,17 +101,11 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txtPaymentType" layoutX="129.0" layoutY="510.0" prefHeight="30.0" prefWidth="327.0" style="-fx-background-color: light black;">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </TextField>
             <Label layoutX="13.0" layoutY="509.0" prefHeight="31.0" prefWidth="114.0" text="Payment Type :">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Line endX="196.0" layoutX="232.0" layoutY="540.0" startX="-100.0" />
             <Label layoutX="13.0" layoutY="572.0" prefHeight="31.0" prefWidth="83.0" text="Qty :">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -145,6 +139,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <JFXComboBox fx:id="cmbPaymentType" layoutX="153.0" layoutY="511.0" onAction="#cmbTypeOnAction" prefHeight="26.0" prefWidth="175.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="516.0" layoutY="102.0" prefHeight="722.0" prefWidth="720.0" style="-fx-background-color: white; -fx-background-radius: 25;">

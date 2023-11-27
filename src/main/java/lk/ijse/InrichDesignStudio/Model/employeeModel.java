@@ -116,4 +116,27 @@ public class employeeModel {
         return null;
 
     }
+
+
+    public employeeDto searchEmployee(String id) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection ();
+
+        String sql = "SELECT * FROM employee WHERE e_id = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        employeeDto dto = null;
+
+        if(resultSet.next()) {
+            String e_id = resultSet.getString(1);
+            String e_name = resultSet.getString(2);
+            String e_address = resultSet.getString(3);
+            String e_tel = resultSet.getString(4);
+            String e_nic = resultSet.getString(5);
+
+            dto = new employeeDto(e_id, e_name, e_address, e_tel,e_nic);
+        }
+        return dto;
+    }
 }

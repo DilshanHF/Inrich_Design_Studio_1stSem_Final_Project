@@ -72,10 +72,12 @@ public class employeeController implements Initializable {
 
     public void btnOnAttendance(ActionEvent actionEvent) {
 
+
     }
 
-    public void btnOnAttendanceDetails(ActionEvent actionEvent) {
-
+    public void btnOnAttendanceDetails(ActionEvent actionEvent) throws IOException {
+        mainPane.getChildren().clear();
+        mainPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/attendanceDetailsForm.fxml")));
     }
 
     public void btnOnEmployeeDetails(ActionEvent actionEvent) throws IOException {

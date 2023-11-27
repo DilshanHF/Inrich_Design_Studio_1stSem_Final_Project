@@ -15,15 +15,9 @@ create table customer(
                          c_email varchar(11) not null
 );
 
-create table employee_attandance(
-                                    att_id varchar(25)primary key ,
-                                    e_id varchar(35),
-                                    date date not null ,
-                                    in_time time not null ,
-                                    out_time time not null ,
-                                    work_hours double(20,2),
-                                    ot_hours double(20,2),
-                                    constraint foreign key (e_id) references employee (e_id) on DELETE cascade on UPDATE cascade
+create table attandance(
+
+
 );
 desc employee_attandance;
 
