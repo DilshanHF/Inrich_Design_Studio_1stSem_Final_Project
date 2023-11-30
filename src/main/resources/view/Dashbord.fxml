@@ -23,22 +23,48 @@
          <children>
             <Pane fx:id="sidepane" layoutY="137.0" prefHeight="719.0" prefWidth="242.0" style="-fx-background-color: #00003f;" styleClass="sidepane" stylesheets="@../styles/style.css">
                <children>
-                  <JFXButton buttonType="RAISED" layoutY="114.0" onAction="#btnOnCustomer" prefHeight="30.0" prefWidth="242.0" ripplerFill="#fffcfc" text="Customers" textFill="#f2eaea">
+                  <JFXButton fx:id="dashBoardColor" buttonType="RAISED" layoutX="-1.0" layoutY="63.0" onAction="#btnOnDasboard" onMouseEntered="#btnDashbaordOnAction" prefHeight="38.0" prefWidth="242.0" text="Dashboard" textFill="#f2eaea">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <ripplerFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.34185733512786">
+                                 <color>
+                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="0.9882352948188782" blue="0.9882352948188782" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </ripplerFill>
+                  </JFXButton>
+                  <JFXButton fx:id="customerbtnColor" buttonType="RAISED" layoutY="114.0" onAction="#btnOnCustomer" onMouseEntered="#btnCustomerOnAction" prefHeight="30.0" prefWidth="242.0" ripplerFill="#fffcfc" text="Customers" textFill="#f2eaea">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="165.0" onAction="#btnOnEmployee" prefHeight="30.0" prefWidth="242.0" text="Employee" textFill="#f2eaea">
+                  <JFXButton fx:id="empolyeeColor" buttonType="RAISED" layoutX="-1.0" layoutY="165.0" onAction="#btnOnEmployee" onMouseEntered="#btnEmployeeOnAction" prefHeight="30.0" prefWidth="242.0" text="Employee" textFill="#f2eaea">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutY="221.0" onAction="#btnOnOrders" prefHeight="30.0" prefWidth="242.0" text="Orders" textFill="#f2eaea">
+                  <JFXButton fx:id="ordersColor" buttonType="RAISED" layoutY="221.0" onAction="#btnOnOrders" onMouseEntered="#btnOrdersOnAction" prefHeight="30.0" prefWidth="242.0" text="Orders" textFill="#f2eaea">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutY="286.0" onAction="#btnOnInventory" prefHeight="30.0" prefWidth="242.0" text="Inventory" textFill="#f2eaea">
+                  <JFXButton fx:id="inventoryColor" buttonType="RAISED" layoutY="286.0" onAction="#btnOnInventory" onMouseEntered="#btnInventoryOnAction" prefHeight="30.0" prefWidth="242.0" text="Inventory" textFill="#f2eaea">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -64,36 +90,10 @@
                         </LinearGradient>
                      </ripplerFill>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="351.0" onAction="#btnOnFinance" prefHeight="30.0" prefWidth="242.0" text="Finance" textFill="#f2eaea">
+                  <JFXButton fx:id="finaceColor" buttonType="RAISED" layoutX="-1.0" layoutY="351.0" onAction="#btnOnFinance" onMouseEntered="#btnFinaceOnAction" prefHeight="30.0" prefWidth="242.0" text="Finance" textFill="#f2eaea">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="-1.0" layoutY="63.0" onAction="#btnOnDasboard" prefHeight="38.0" prefWidth="242.0" text="Dashboard" textFill="#f2eaea">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                     <ripplerFill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="0.34185733512786">
-                                 <color>
-                                    <Color red="1.0" green="0.9888888597488403" blue="0.9888888597488403" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="0.9882352948188782" blue="0.9882352948188782" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </ripplerFill>
                   </JFXButton>
                   <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="14.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                      <image>

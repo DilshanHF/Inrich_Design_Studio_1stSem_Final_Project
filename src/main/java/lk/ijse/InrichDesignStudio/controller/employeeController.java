@@ -70,8 +70,9 @@ public class employeeController implements Initializable {
     employeeModel empModel = new employeeModel();
 
 
-    public void btnOnAttendance(ActionEvent actionEvent) {
-
+    public void btnOnAttendance(ActionEvent actionEvent) throws IOException {
+        mainPane.getChildren().clear();
+        mainPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/markAttendanceForm.fxml")));
 
     }
 

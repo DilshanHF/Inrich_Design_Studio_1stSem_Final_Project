@@ -1,5 +1,6 @@
 package lk.ijse.InrichDesignStudio.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -21,6 +23,7 @@ import javafx.util.Duration;
 import lk.ijse.InrichDesignStudio.Model.*;
 import util.SystemAlert;
 
+import javax.swing.text.html.StyleSheet;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -36,6 +39,18 @@ public class dashboardController implements Initializable {
     public AnchorPane pane;
     public Pane sidepane;
     public AnchorPane mainPane;
+    @FXML
+    private JFXButton customerbtnColor;
+    @FXML
+    private JFXButton empolyeeColor;
+    @FXML
+    private JFXButton ordersColor;
+    @FXML
+    private JFXButton inventoryColor;
+    @FXML
+    private JFXButton finaceColor;
+    @FXML
+    private JFXButton dashBoardColor;
     @FXML
     private Label lblOrders;
 
@@ -73,6 +88,7 @@ public class dashboardController implements Initializable {
 
     incomeModel iModel = new incomeModel();
     expensesModel exModel = new expensesModel();
+
 
 
     public void btnOnDasboard(ActionEvent actionEvent) throws IOException {
@@ -199,6 +215,60 @@ public class dashboardController implements Initializable {
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+    }
+
+    public void btnDashbaordOnAction(MouseEvent mouseEvent) {
+        dashBoardColor.setStyle("-fx-background-color: #f5f5f5;");
+        customerbtnColor.setStyle("-fx-background-color:  #00003f;");
+        empolyeeColor.setStyle("-fx-background-color:  #00003f;");
+        ordersColor.setStyle("-fx-background-color:  #00003f;");
+        inventoryColor.setStyle("-fx-background-color:  #00003f;");
+        finaceColor.setStyle("-fx-background-color:  #00003f;");
+    }
+
+    public void btnCustomerOnAction(MouseEvent mouseEvent) {
+        dashBoardColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color:  #f5f5f5;");
+        empolyeeColor.setStyle("-fx-background-color:  #00003f;");
+        ordersColor.setStyle("-fx-background-color:  #00003f;");
+        inventoryColor.setStyle("-fx-background-color:  #00003f;");
+        finaceColor.setStyle("-fx-background-color:  #00003f;");
+    }
+
+    public void btnEmployeeOnAction(MouseEvent mouseEvent) {
+        dashBoardColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color: #00003f;");
+        empolyeeColor.setStyle("-fx-background-color:  #f5f5f5;");
+        ordersColor.setStyle("-fx-background-color:  #00003f;");
+        inventoryColor.setStyle("-fx-background-color:  #00003f;");
+        finaceColor.setStyle("-fx-background-color:  #00003f;");
+    }
+
+    public void btnOrdersOnAction(MouseEvent mouseEvent) {
+        dashBoardColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color: #00003f;");
+        empolyeeColor.setStyle("-fx-background-color:  #00003f;");
+        ordersColor.setStyle("-fx-background-color:  #f5f5f5;");
+        inventoryColor.setStyle("-fx-background-color:  #00003f;");
+        finaceColor.setStyle("-fx-background-color:  #00003f;");
+    }
+
+    public void btnInventoryOnAction(MouseEvent mouseEvent) {
+        dashBoardColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color: #00003f;");
+        empolyeeColor.setStyle("-fx-background-color:  #00003f;");
+        ordersColor.setStyle("-fx-background-color:  #00003f;");
+        inventoryColor.setStyle("-fx-background-color:  #f5f5f5;");
+        finaceColor.setStyle("-fx-background-color:  #00003f;");
+    }
+
+    public void btnFinaceOnAction(MouseEvent mouseEvent) {
+        dashBoardColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color: #00003f;");
+        empolyeeColor.setStyle("-fx-background-color:  #00003f;");
+        ordersColor.setStyle("-fx-background-color:  #00003f;");
+        inventoryColor.setStyle("-fx-background-color:  #00003f;");
+        finaceColor.setStyle("-fx-background-color:  #f5f5f5;");
     }
 }
 
