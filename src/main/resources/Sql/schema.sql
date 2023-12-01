@@ -18,7 +18,7 @@ create table customer(
 create table attandance(
     e_id varchar(35)NOT NULL ,
     e_name varchar(155)NOT NULL ,
-    attandance_time time NOT NULL ,
+    e_nic varchar(155)NOT NULL,
     attandance_date date NOT NULL ,
     attandance_status varchar(10) NOT NULL ,
     constraint foreign key (e_id) references employee (e_id) on delete cascade on UPDATE cascade
@@ -142,3 +142,4 @@ drop table item;
 
 alter table income drop column description;
 
+drop table attandance;

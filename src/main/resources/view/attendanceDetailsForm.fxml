@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="845.0" prefWidth="1250.0" style="-fx-background-color: #DBE2E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.attendanceDetailsController">
+<AnchorPane fx:id="mainPane" prefHeight="845.0" prefWidth="1250.0" style="-fx-background-color: #DBE2E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.AttendanceDetailsController">
    <children>
       <Pane prefHeight="55.0" prefWidth="1250.0" style="-fx-background-color: #00003f;">
          <children>
@@ -110,14 +110,14 @@
                <columns>
                   <TableColumn fx:id="colEmpId" prefWidth="165.60002899169922" text="Employee Id" />
                   <TableColumn fx:id="colEmpName" prefWidth="171.199951171875" text="Name" />
-                  <TableColumn fx:id="colEmpCon" prefWidth="152.80001831054688" text="NIC" />
-                  <TableColumn fx:id="colEmpNic" prefWidth="272.00006103515625" text="Status" />
+                  <TableColumn fx:id="colNic" prefWidth="152.80001831054688" text="NIC" />
+                  <TableColumn fx:id="colStatus" prefWidth="272.00006103515625" text="Status" />
                </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <DatePicker layoutX="61.0" layoutY="96.0" prefHeight="37.0" prefWidth="296.0" promptText="Date" style="-fx-background-color: white;" />
-      <AnchorPane layoutX="869.0" layoutY="593.0" prefHeight="232.0" prefWidth="368.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <DatePicker fx:id="txtDate" layoutX="61.0" layoutY="96.0" onAction="#datePickerOnAction" prefHeight="37.0" prefWidth="296.0" promptText="Date" style="-fx-background-color: white;" />
+      <AnchorPane layoutX="868.0" layoutY="543.0" prefHeight="232.0" prefWidth="368.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
             <JFXComboBox fx:id="cmbEmployeeId" focusColor="#27282b" layoutX="16.0" layoutY="62.0" onAction="#cmbOnAction" prefHeight="26.0" prefWidth="336.0" promptText="Employee" unFocusColor="#2e2a2a" />
             <Label layoutX="20.0" layoutY="21.0" prefHeight="30.0" prefWidth="237.0" text="Generate QR Code" textFill="#00003f">
@@ -140,6 +140,31 @@
                   <Font name="Georgia Bold" size="17.0" />
                </font>
             </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="858.0" layoutY="115.0" prefHeight="232.0" prefWidth="368.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <JFXComboBox fx:id="cmbOnReport" focusColor="#27282b" layoutX="16.0" layoutY="62.0" onAction="#cmbOnGetReport" prefHeight="26.0" prefWidth="336.0" promptText="Employee" unFocusColor="#2e2a2a" />
+            <Label layoutX="20.0" layoutY="21.0" prefHeight="30.0" prefWidth="343.0" text="Attendance Report" textFill="#00003f">
+               <font>
+                  <Font name="Georgia Bold" size="24.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="20.0" layoutY="170.0" onAction="#btnOnGetReport" prefHeight="48.0" prefWidth="198.0" style="-fx-background-color: #6ec297; -fx-background-radius: 25;" text="              Get Report" textFill="#f4f2f2">
+               <font>
+                  <Font name="Georgia Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="lblName1" layoutX="20.0" layoutY="116.0" prefHeight="18.0" prefWidth="178.0" text="Dilshan Fonseka">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="45.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons8-report-48.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

@@ -1,72 +1,95 @@
 package lk.ijse.InrichDesignStudio.Mail;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 public class MailUtil implements Runnable{
 
-        private String msg;
-        private String to;//
-        private String subject;
-    private boolean successful;
+    private String msg;
+    private String to;
+    private String subject;
+
+    private File file;
 
     public void setMsg(String msg) {
-            this.msg = msg;
-        }//
+        this.msg = msg;
+    }
 
-        public void setTo(String to) {
-            this.to = to;
-        }
+    public void setTo(String to) {
+        this.to = to;
+    }
 
-        public void setSubject(String subject) {
-            this.subject = subject;
-        }
+    public void setFile(File file) {
+        this.file = file;
+    }
 
-        public void outMail() throws MessagingException {
-            String from = "dilshanfonseka76@gmail.com"; //sender's email address4
-            String host = "localhost";
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
-            Properties properties = new Properties();
-            properties.put("mail.smtp.auth", "true");
-            properties.put("mail.smtp.starttls.enable", "true");
-            properties.put("mail.smtp.host", "smtp.gmail.com");
-            properties.put("mail.smtp.port", 587);
+    public void outMail() throws MessagingException, IOException {
+        String from = "dilshanfonseka76@gmail.com"; //sender's email address
+        String host = "localhost";
 
-
-
-
-            Session session = Session.getDefaultInstance(properties, new Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("dilshanfonseka76@gmail.com", "amcc todb acra cesc");  // have to change some settings in SMTP
-                }
-            });
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", 587);
 
 
-            MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(new InternetAddress(from));
-            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            mimeMessage.setSubject(this.subject);
-            mimeMessage.setText(this.msg);
+
+
+        Session session = Session.getDefaultInstance(properties, new Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("dilshanfonseka76@gmail.com", "amcc todb acra cesc");  // have to change some settings in SMTP
+            }
+        });
+
+
+        MimeMessage mimeMessage = new MimeMessage(session);
+        mimeMessage.setFrom(new InternetAddress(from));
+        mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        mimeMessage.setSubject(this.subject);
+        mimeMessage.setText(this.msg);
+
+        if (file != null) {
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.attachFile(this.file);
+
+
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mimeBodyPart);
+
+            mimeMessage.setContent(multipart);
             Transport.send(mimeMessage);
 
             System.out.println("sent");
+
+        } else {
+            Transport.send(mimeMessage);
+            System.out.println("sent");
         }
 
-        @Override
-        public void run() {
-            if (msg != null) {
-                try {
-                    outMail();
-                } catch (MessagingException e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                System.out.println("not sent. empty msg!");
-            }
     }
 
-    public boolean isSuccessful() {
-        return successful;
-    }
-}
+    @Override
+    public void run() {
+        if (msg != null) {
+            try {
+                outMail();
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("not sent. empty msg!");
+        }
+    }}

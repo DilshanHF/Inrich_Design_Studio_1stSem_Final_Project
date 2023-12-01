@@ -7,139 +7,45 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="845.0" prefWidth="1250.0" style="-fx-background-color: #DBE2E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.QrScanController">
+<AnchorPane prefHeight="590.0" prefWidth="600.0" style="-fx-background-color: #e9ecef;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.InrichDesignStudio.controller.QrScanController">
    <children>
-      <Pane prefHeight="55.0" prefWidth="1250.0" style="-fx-background-color: #00003f;">
+      <AnchorPane fx:id="minipane" layoutX="35.0" layoutY="33.0" prefHeight="364.0" prefWidth="525.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px;">
          <children>
-            <Label layoutX="14.0" prefHeight="55.0" prefWidth="327.0" text="Employee Dashboard" textFill="#fafafc">
-               <font>
-                  <Font name="Georgia Bold" size="28.0" />
-               </font>
-            </Label>
-            <JFXButton buttonType="RAISED" layoutX="833.0" layoutY="23.0" onAction="#btnOnAttendance" prefHeight="26.0" prefWidth="208.0" style="-fx-background-color: white; -fx-background-radius: 25;" text="Mark Attendance" textFill="#ece6e6">
-               <font>
-                  <Font name="Georgia Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <ripplerFill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.10228802153432029">
-                           <color>
-                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.9555555582046509" blue="0.9555555582046509" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </ripplerFill>
-            </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="1045.0" layoutY="23.0" onAction="#btnOnAttendanceDetails" prefHeight="26.0" prefWidth="198.0" style="-fx-background-radius: 25;" text="Attendance Details" textFill="#ece6e6">
-               <font>
-                  <Font name="Georgia Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <ripplerFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </ripplerFill>
-            </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="625.0" layoutY="23.0" onAction="#btnOnEmployeeDetails" prefHeight="26.0" prefWidth="208.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Employee Details" textFill="#ece6e6">
-               <font>
-                  <Font name="Georgia Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <ripplerFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </ripplerFill>
-            </JFXButton>
-         </children>
-      </Pane>
-      <AnchorPane layoutX="269.0" layoutY="109.0" prefHeight="590.0" prefWidth="600.0" style="-fx-background-color: #e9ecef;">
-         <children>
-            <AnchorPane fx:id="minipane" layoutX="35.0" layoutY="33.0" prefHeight="364.0" prefWidth="525.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px;">
-               <children>
-                  <ImageView fx:id="imageView" fitHeight="259.0" fitWidth="478.0" layoutX="24.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
-                  <ProgressBar fx:id="progress" layoutX="26.0" layoutY="317.0" prefHeight="23.0" prefWidth="478.0" progress="0.0" stylesheets="@../styles/progressbar.css" />
-               </children>
-            </AnchorPane>
-            <JFXButton fx:id="btnStart" layoutX="75.0" layoutY="490.0" onAction="#startBtnOnAction" prefHeight="45.0" prefWidth="125.0" style="-fx-background-color: #00003f; -fx-background-radius: 10px;" text="Start" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="btnStop" layoutX="408.0" layoutY="490.0" onAction="#stopBtnOnAction" prefHeight="45.0" prefWidth="125.0" style="-fx-background-color: #00003f; -fx-background-radius: 10px;" text="Stop" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <Label layoutX="75.0" layoutY="423.0" prefHeight="34.0" prefWidth="115.0" text="Employee Id :">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <JFXTextArea fx:id="txtArea" layoutX="201.0" layoutY="422.0" prefHeight="34.0" prefWidth="282.0" />
-            <JFXButton fx:id="btnBack" layoutX="246.0" layoutY="490.0" onAction="#btnOnBack" prefHeight="45.0" prefWidth="125.0" style="-fx-background-color: #00003f; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
+            <ImageView fx:id="imageView" fitHeight="259.0" fitWidth="478.0" layoutX="24.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+            <ProgressBar fx:id="progress" layoutX="26.0" layoutY="317.0" prefHeight="23.0" prefWidth="478.0" progress="0.0" stylesheets="@../styles/progressbar.css" />
          </children>
       </AnchorPane>
+      <JFXButton fx:id="btnStart" layoutX="75.0" layoutY="490.0" onAction="#startBtnOnAction" prefHeight="45.0" prefWidth="125.0" style="-fx-background-color: #00003f; -fx-background-radius: 10px;" text="Start" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnStop" layoutX="408.0" layoutY="490.0" onAction="#stopBtnOnAction" prefHeight="45.0" prefWidth="125.0" style="-fx-background-color: #00003f; -fx-background-radius: 10px;" text="Stop" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="75.0" layoutY="423.0" prefHeight="34.0" prefWidth="115.0" text="Employee Id :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txtArea" layoutX="201.0" layoutY="422.0" prefHeight="34.0" prefWidth="282.0" />
+      <JFXButton fx:id="btnBack" layoutX="246.0" layoutY="490.0" onAction="#btnOnBack" prefHeight="45.0" prefWidth="125.0" style="-fx-background-color: #00003f; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>

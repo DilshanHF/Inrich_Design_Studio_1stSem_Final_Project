@@ -24,14 +24,19 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.ImageView;
 import lk.ijse.InrichDesignStudio.dto.Tm.attendanceTm;
+import lombok.Setter;
 
 //import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class QrScanController {
+    @FXML
+    private JFXButton btnBack;
+
     @FXML
     private JFXButton btnStart;
 
@@ -49,18 +54,15 @@ public class QrScanController {
 
     @FXML
     private JFXTextArea txtArea;
-
-
-    @FXML
-    private JFXButton btnBack;
-
     private  boolean isReading = false;
     private Webcam webcam;
     private WebcamPanel webcamPanel;
     @FXML
     private AnchorPane mainPane;
     ObservableList<attendanceTm> employee = FXCollections.observableArrayList();
-    private attendanceController attController ;
+
+    @Setter
+    private AttendanceController attController ;
 
     public void initialize(){
         setGif();
@@ -126,7 +128,11 @@ public class QrScanController {
                                 txtArea.appendText(result.getText() + "\n");
                                 String id = result.getText();
                                 //String name = lblName.getText();
-                                attController.markAttendance(id);
+                                try {
+                                    attController.markAttendance(id);
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
 
                                 new Alert(Alert.AlertType.INFORMATION, "Data Scanned Successfully!").showAndWait();
                             } else {
@@ -150,21 +156,11 @@ public class QrScanController {
 
     }
 
-    public void btnOnAttendance(ActionEvent actionEvent) throws IOException {
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/markAttendanceForm.fxml")));
-        
-    }
 
-    public void btnOnAttendanceDetails(ActionEvent actionEvent) throws IOException {
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/attendanceDetailsForm.fxml")));
-    }
 
-    public void btnOnEmployeeDetails(ActionEvent actionEvent) throws IOException {
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/employeeForm.fxml")));
-    }
+
+
+
 
     public void btnOnBack(ActionEvent actionEvent) throws IOException {
         mainPane.getChildren().clear();
