@@ -29,6 +29,7 @@ public class CustomerController implements Initializable {
 
 
     public TextField txtCustomerId;
+    public Button btnSearch;
     @FXML
     private AnchorPane mainPane;
 
@@ -66,6 +67,8 @@ public class CustomerController implements Initializable {
 
     @FXML
     private TableView<customerTm> tblCustomer;
+    @FXML
+    private TextField txtSearchId;
 
 
 
@@ -384,46 +387,35 @@ public class CustomerController implements Initializable {
 
 
 
-    public void btnOnClickOnSearch(ActionEvent actionEvent) {
+    public void btnOnClickOnSearch(ActionEvent actionEvent) throws SQLException {
         boolean isExists = false;
         try {
-            isExists = cusModel.exitCustomer(txtCustomerId.getText());
+            isExists = cusModel.exitCustomer(txtSearchId.getText());
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
         }
-        if(!(txtCustomerId.getText().isEmpty())){
-            if (Regex.getCustomerId().matcher(txtCustomerId.getText()).matches()){
-                String id = txtCustomerId.getText().trim();
+        if(!(txtSearchId.getText().isEmpty())){
+            if (Regex.getCustomerId().matcher(txtSearchId.getText()).matches()){
+                String id = txtSearchId.getText();
                 if (isExists){
-                    ObservableList<customerTm> obList = FXCollections.observableArrayList();
                     try {
-                        List<CustomerDto> dtoList =  new ArrayList<>();
-                        dtoList.add(cusModel.searchCustomer(id));
-                        for (CustomerDto dto:dtoList) {
-                            JFXButton button = new JFXButton("edit",new ImageView("img/edit-97@30x.png"));
-                            button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                            button.getStyleClass().add("infoBtn");
-                            setButtonOnAction(button);
-                            obList.add(
-                                    new customerTm(
-                                            dto.getId(),
-                                            dto.getName(),
-                                            dto.getAddress(),
-                                            dto.getTel(),
-                                            dto.getEmail(),
-                                            button
-                                    )
-                            );
-
+                        CustomerDto customerDto = cusModel.searchCustomer(id);
+                        if (customerDto != null){
+                            txtId.setText(customerDto.getId());
+                            txtName.setText(customerDto.getName());
+                            txtAddress.setText(customerDto.getAddress());
+                            txtNumber.setText(customerDto.getTel());
+                            txtEmail.setText(customerDto.getEmail());
+                        }else {
+                            new SystemAlert(Alert.AlertType.WARNING, "Warning", "No Customer Found!", ButtonType.OK).show();
                         }
-                        tblCustomer.setItems(obList);
-
-
                     } catch (SQLException e) {
-                        //throw new RuntimeException(e);
-                        new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+                       // throw new RuntimeException(e);
+                        new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
                     }
+
+
                 }
             }else {
                 new SystemAlert(Alert.AlertType.ERROR, "Error", "Invalid customer Id", ButtonType.OK).show();
@@ -432,5 +424,13 @@ public class CustomerController implements Initializable {
             new SystemAlert(Alert.AlertType.ERROR, "Error", "Please fill fields", ButtonType.OK).show();
         }
 
+    }
+
+    public void searchOnAction(ActionEvent actionEvent) throws SQLException {
+        btnOnClickOnSearch(actionEvent);
+    }
+
+    public void btnOnClear(ActionEvent actionEvent) {
+        clearField();
     }
 }

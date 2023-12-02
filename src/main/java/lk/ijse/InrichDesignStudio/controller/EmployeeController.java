@@ -61,6 +61,9 @@ public class EmployeeController implements Initializable {
     @FXML
     private TableView<employeeTm> tblEmployee;
 
+    @FXML
+    private TextField txtSearchId;
+
 
 
     EmployeeModel empModel = new EmployeeModel();
@@ -345,5 +348,52 @@ public class EmployeeController implements Initializable {
     }
 
 
+    public void searchOnAction(ActionEvent actionEvent) {
+        btnOnClickOnSearch(actionEvent);
 
+    }
+
+    public void btnOnClickOnSearch(ActionEvent actionEvent) {
+        boolean isExists = false;
+        try {
+            isExists = empModel.exitCustomer(txtSearchId.getText());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
+        }
+        if(!(txtSearchId.getText().isEmpty())){
+            if (Regex.getEmployeeId().matcher(txtSearchId.getText()).matches()){
+                String id = txtSearchId.getText();
+                if (isExists){
+                    try {
+                        //CustomerDto customerDto = cusModel.searchCustomer(id);
+                        EmployeeDto empDto = empModel.searchEmployee(id);
+                        if (empDto != null){
+                            txtId.setText(empDto.getId());
+                            txtName.setText(empDto.getName());
+                            txtAddress.setText(empDto.getAddress());
+                            txtTel.setText(empDto.getTel());
+                            txtNic.setText(empDto.getNic());
+                        }else {
+                            new SystemAlert(Alert.AlertType.WARNING, "Warning", "No Employee Found!", ButtonType.OK).show();
+                        }
+                    } catch (SQLException e) {
+                        // throw new RuntimeException(e);
+                        new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
+                    }
+
+
+                }
+            }else {
+                new SystemAlert(Alert.AlertType.ERROR, "Error", "Invalid Employee Id", ButtonType.OK).show();
+            }
+        }else{
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please fill fields", ButtonType.OK).show();
+        }
+
+    }
+
+    public void btnOnClear(ActionEvent actionEvent) {
+        clearField();
+    }
 }

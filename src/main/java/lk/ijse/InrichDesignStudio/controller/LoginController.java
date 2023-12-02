@@ -47,7 +47,7 @@ public class LoginController {
                     resetFieldStyle(userNameField);
                     resetFieldStyle(txtHidePasword);
 
-                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Succes", "SuccesFully login", ButtonType.OK).showAndWait();
+                    //new SystemAlert(Alert.AlertType.CONFIRMATION, "Succes", "SuccesFully login", ButtonType.OK).showAndWait();
                     MailUtil mail = new MailUtil();
                     mail.setMsg("Welcome..! \n\n\tYou are successfully logged  \n\nThank you..!");
                     mail.setTo(username);

@@ -30,6 +30,32 @@
             <TextField fx:id="txtAddress" layoutX="23.0" layoutY="106.0" prefHeight="26.0" prefWidth="340.0" promptText="Address" style="-fx-background-radius: 25;" />
             <TextField fx:id="txtEmail" layoutX="460.0" layoutY="106.0" prefHeight="26.0" prefWidth="378.0" promptText="E-Mail" style="-fx-background-radius: 25;" />
             <TextField fx:id="txtNumber" layoutX="23.0" layoutY="163.0" prefHeight="26.0" prefWidth="340.0" promptText="Contact Number" style="-fx-background-radius: 25;" />
+            <JFXButton buttonType="RAISED" layoutX="688.0" layoutY="163.0" onAction="#btnOnClear" prefHeight="31.0" prefWidth="161.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="          Clear" textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.24705882370471954" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
+            <ImageView fitHeight="31.0" fitWidth="42.0" layoutX="696.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons8-clear-40.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="14.0" layoutY="321.0" prefHeight="509.0" prefWidth="1182.0" style="-fx-background-color: white; -fx-background-radius: 25;">
@@ -46,7 +72,7 @@
             </TableView>
             <AnchorPane layoutX="26.0" layoutY="14.0" prefHeight="31.0" prefWidth="451.0" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
                <children>
-                  <TextField fx:id="txtCustomerId" layoutY="-1.0" prefHeight="55.0" prefWidth="392.0" promptText="Search Customer Id or Name" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
+                  <TextField fx:id="txtSearchId" layoutY="-1.0" onAction="#searchOnAction" prefHeight="55.0" prefWidth="392.0" promptText="Search Customer Id or Name" style="-fx-background-color: #DBE2E9; -fx-background-radius: 25;">
                      <font>
                         <Font size="13.0" />
                      </font>
