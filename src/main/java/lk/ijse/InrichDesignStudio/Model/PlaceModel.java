@@ -12,6 +12,7 @@ public class PlaceModel {
     private OrderModel oModel = new OrderModel();
     private IncomeModel inModel = new IncomeModel();
     private InventoryModel invenModel = new InventoryModel();
+    private InvoiceModel invModel = new InvoiceModel();
 
     public boolean placeOrder(PlaceOrderDto dto) throws SQLException {
         boolean result = false;
@@ -36,11 +37,17 @@ public class PlaceModel {
              System.out.println("1");
             if(isSavedIncome){
                  boolean isSavedInventory = invenModel.saveInventory(dto.getCartTmList(),orderId,handOverDate);
+                 //invModel.saveData(orderId,dto.getCartTmList());
                  System.out.println("1");
 
                    if(isSavedInventory){
-                        connection.commit();
-                        result  = true;
+                        boolean isSavedInvoice = invModel.saveData(orderId,dto.getCartTmList());
+                       System.out.println("1");
+
+                       if (isSavedInvoice) {
+                           connection.commit();
+                           result = true;
+                       }
 
                     }
              }

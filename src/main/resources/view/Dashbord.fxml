@@ -125,6 +125,11 @@
                         <Image url="@../assets/icons8-coins-64.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="19.0" layoutY="642.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-log-out-48.png" />
+                     </image>
+                  </ImageView>
                </children></Pane>
             <Label layoutX="67.0" layoutY="44.0" prefHeight="30.0" prefWidth="90.0" text="Welcome,">
                <font>

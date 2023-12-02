@@ -12,21 +12,25 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.InrichDesignStudio.Db.DbConnection;
 import lk.ijse.InrichDesignStudio.Mail.MailUtil;
 import lk.ijse.InrichDesignStudio.Model.*;
 import lk.ijse.InrichDesignStudio.dto.Tm.cartTm;
 import lk.ijse.InrichDesignStudio.dto.CustomerDto;
 import lk.ijse.InrichDesignStudio.dto.ItemDto;
 import lk.ijse.InrichDesignStudio.dto.PlaceOrderDto;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import util.SystemAlert;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class PlaceOrderController {
     @FXML
@@ -232,6 +236,7 @@ public class PlaceOrderController {
     }
 
     public void btnAddToCartOnAction(ActionEvent actionEvent) {
+        String id = lblOrderId.getText();
         String code = cmbItem.getValue();
         String description = lblItemName.getText();
         int qty = Integer.parseInt(txtQty.getText());
@@ -312,6 +317,7 @@ public class PlaceOrderController {
         double amount = Double.parseDouble(lblTotal.getText());
         String email = lblCustomerEmail.getText();
         String name = lblCustomerName.getText();
+        String tot = lblTotal.getText();
 
 
         List<cartTm> cartTmList = new ArrayList<>();
@@ -323,21 +329,59 @@ public class PlaceOrderController {
 
         System.out.println("Place order form controller: " + cartTmList);
 
+
         var dto = new PlaceOrderDto(orderId, date, customerId, invoiceId, handOverdate, type,amount, cartTmList);
         try {
             boolean isSuccess = pModel.placeOrder(dto);
             if (isSuccess) {
                 new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Order has placed!",ButtonType.OK).show();
-                sendMail(customerId, name,email ,orderId);
+                generateInvoice(invoiceId, name,email ,orderId,tot);
                 tblCart.getItems().clear();
                 clearAll();
 
             }else {
-                new SystemAlert(Alert.AlertType.INFORMATION,"Information","Are you sure to remove '").showAndWait();
+                new SystemAlert(Alert.AlertType.INFORMATION,"Information","Order Not Placed'").showAndWait();
             }
         } catch (SQLException e) {
            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
             //throw new RuntimeException(e);
+        }
+    }
+
+    private void generateInvoice(String invoiceId, String name, String email, String orderId, String tot) {
+        if (orderId != null) {
+            new Thread(() -> {
+                try {
+                    InputStream resourceAsStream = getClass().getResourceAsStream("/report/Receipt.jrxml");
+                    JasperDesign load = JRXmlLoader.load(resourceAsStream);
+                    //  JasperDesign design = JRXmlLoader.load("/report/AttendanceReport.jrxml");
+                    JasperReport report = JasperCompileManager.compileReport(load);
+
+                    HashMap map = new HashMap();
+                    map.put("id", orderId);
+                    map.put("tot", tot);
+
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, DbConnection.getInstance().getConnection());
+                    JasperViewer.viewReport(jasperPrint, false);
+
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\User\\Desktop\\Attendance Reports\\"+orderId+".pdf");
+
+                    MailUtil mail = new MailUtil();
+                    mail.setFile(new File("C:\\Users\\User\\Desktop\\Attendance Reports\\" + orderId + ".pdf"));
+                    mail.setTo(email);
+                    mail.setSubject("Order Invoice");
+                    mail.setMsg("Your Order has Placed and Invoice is attached here");
+
+                    Thread thread = new Thread(mail);
+                    thread.start();
+
+                } catch (SQLException | JRException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+                }
+            }).start();
+        }else {
+            new SystemAlert(Alert.AlertType.WARNING,"Warning","Please select an employee",ButtonType.OK).show();
         }
     }
 
@@ -352,35 +396,13 @@ public class PlaceOrderController {
         lblPrice.setText("");
         //lblTotal.setText("");
         lblItemName.setText("");
-        txtPaymentType.setText("");
-        cmbCustomerId.getSelectionModel().clearSelection();
-        cmbItem.getSelectionModel().clearSelection();
-        cmbPaymentType.getSelectionModel().clearSelection();
+        //cmbPaymentType.getSelectionModel().clearSelection();
+        cmbCustomerId.getItems().clear();
+        cmbItem.getItems().clear();
+        cmbPaymentType.getItems().clear();
     }
 
-    private void sendMail(String customerId, String name , String email,String orderId) {
-        String subject = "Order placed 😊";
-        String message = " Your Order has placed  <b>"+orderId+"</b> </b>"+name+"</b>  . You can cancel order by contact us.";
 
-        MailUtil mail = new MailUtil();
-        mail.setMsg(message);
-        mail.setTo(email);
-        mail.setSubject(subject);
-
-        Thread thread = new Thread(mail);
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-// Check if the mail thread was successful
-
-
-
-    }
 
 
     public void cmbTypeOnAction(ActionEvent actionEvent) {

@@ -2,6 +2,7 @@ package lk.ijse.InrichDesignStudio.Model;
 
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
 import lk.ijse.InrichDesignStudio.dto.IncomeDto;
+import lk.ijse.InrichDesignStudio.dto.Tm.cartTm;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -87,6 +88,7 @@ public class IncomeModel {
         }
         return 0;
     }
+
 
 
 }

@@ -102,6 +102,16 @@ create table inventory_details(
 
 );
 
+create table invoice(
+    order_id varchar(155)NOT NULL ,
+    item_code varchar(155)NOT NULL ,
+    desciption varchar(155)NOT NULL ,
+    qty int NOT NULL ,
+    total double(40,2)NOT NULL,
+    constraint foreign key(order_id)references orders(order_id)on delete cascade on update cascade,
+    constraint foreign key (item_code)references item(item_code)on delete cascade on update cascade
+);
+
 desc user;
 select * from user;
 select * from customer;
@@ -143,3 +153,5 @@ drop table item;
 alter table income drop column description;
 
 drop table attandance;
+
+
