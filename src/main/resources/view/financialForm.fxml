@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -87,6 +88,28 @@
                   <Font name="Georgia Bold" size="19.0" />
                </font>
             </Label>
+            <DatePicker fx:id="datePicker" layoutX="43.0" layoutY="62.0" prefHeight="31.0" prefWidth="294.0" promptText="Search Day" />
+            <JFXButton buttonType="RAISED" layoutX="991.0" layoutY="65.0" onAction="#btnOnReport" prefHeight="31.0" prefWidth="161.0" style="-fx-background-color: #00003f; -fx-background-radius: 25;" text="Get Report" textFill="#ece6e6">
+               <font>
+                  <Font name="Georgia Bold" size="17.0" />
+               </font>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8920077681541443" green="0.8920077681541443" blue="0.9263157844543457" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color blue="0.24705882370471954" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill>
+            </JFXButton>
          </children>
       </AnchorPane>
    </children>

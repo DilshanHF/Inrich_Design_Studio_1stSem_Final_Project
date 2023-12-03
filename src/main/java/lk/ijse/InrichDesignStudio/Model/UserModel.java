@@ -38,7 +38,7 @@ public class UserModel {
     public boolean exitUser(String email) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "SELECT email FROM customer WHERE email = ?";
+        String sql = "SELECT email FROM user WHERE email = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, email);
 

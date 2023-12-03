@@ -207,7 +207,7 @@ public class AttendanceDetailsController implements Initializable {
                     JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\User\\Desktop\\Attendance Reports\\"+id+".pdf");
 
                 } catch (SQLException | JRException e) {
-                    e.printStackTrace();
+                   // e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
                 }
             }).start();
