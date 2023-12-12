@@ -120,7 +120,7 @@
                         <Image url="@../assets/icons8-furniture-64.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="22.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="19.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/icons8-coins-64.png" />
                      </image>
@@ -128,6 +128,26 @@
                   <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="19.0" layoutY="642.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/icons8-log-out-48.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton fx:id="deliverycolor" buttonType="RAISED" layoutX="-1.0" layoutY="409.0" onMouseEntered="#btnOnDelivery" prefHeight="30.0" prefWidth="242.0" text="Delivery" textFill="#f2eaea">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="19.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-delivery-48.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton fx:id="suppliercolor" buttonType="RAISED" layoutY="472.0" onMouseEntered="#btnOnSupplier" prefHeight="30.0" prefWidth="242.0" text="Supplier" textFill="#f2eaea">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="19.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-supplier-48.png" />
                      </image>
                   </ImageView>
                </children></Pane>

@@ -38,6 +38,7 @@ public class DashboardController implements Initializable {
     public AnchorPane pane;
     public Pane sidepane;
     public AnchorPane mainPane;
+    public JFXButton deliverycolor;
     @FXML
     private JFXButton customerbtnColor;
     @FXML
@@ -64,6 +65,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Label lblTime;
+    @FXML
+    private JFXButton suppliercolor;
 
     @FXML
     private Label lblUserName;
@@ -240,42 +243,75 @@ public class DashboardController implements Initializable {
         ordersColor.setStyle("-fx-background-color:  #00003f;");
         inventoryColor.setStyle("-fx-background-color:  #00003f;");
         finaceColor.setStyle("-fx-background-color:  #00003f;");
+        deliverycolor.setStyle("-fx-background-color:  #00003f;");
+        suppliercolor.setStyle("-fx-background-color:  #00003f;");
     }
 
     public void btnEmployeeOnAction(MouseEvent mouseEvent) {
         dashBoardColor.setStyle("-fx-background-color: #00003f;");
-        customerbtnColor.setStyle("-fx-background-color: #00003f;");
-        empolyeeColor.setStyle("-fx-background-color:  #f5f5f5;");
+        customerbtnColor.setStyle("-fx-background-color:  #f5f5f5;");
+        empolyeeColor.setStyle("-fx-background-color:  #00003f;");
         ordersColor.setStyle("-fx-background-color:  #00003f;");
         inventoryColor.setStyle("-fx-background-color:  #00003f;");
         finaceColor.setStyle("-fx-background-color:  #00003f;");
+        deliverycolor.setStyle("-fx-background-color:  #00003f;");
+        suppliercolor.setStyle("-fx-background-color:  #00003f;");
     }
 
     public void btnOrdersOnAction(MouseEvent mouseEvent) {
         dashBoardColor.setStyle("-fx-background-color: #00003f;");
-        customerbtnColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color:  #f5f5f5;");
         empolyeeColor.setStyle("-fx-background-color:  #00003f;");
-        ordersColor.setStyle("-fx-background-color:  #f5f5f5;");
+        ordersColor.setStyle("-fx-background-color:  #00003f;");
         inventoryColor.setStyle("-fx-background-color:  #00003f;");
         finaceColor.setStyle("-fx-background-color:  #00003f;");
+        deliverycolor.setStyle("-fx-background-color:  #00003f;");
+        suppliercolor.setStyle("-fx-background-color:  #00003f;");
     }
 
     public void btnInventoryOnAction(MouseEvent mouseEvent) {
         dashBoardColor.setStyle("-fx-background-color: #00003f;");
-        customerbtnColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color:  #f5f5f5;");
         empolyeeColor.setStyle("-fx-background-color:  #00003f;");
         ordersColor.setStyle("-fx-background-color:  #00003f;");
-        inventoryColor.setStyle("-fx-background-color:  #f5f5f5;");
+        inventoryColor.setStyle("-fx-background-color:  #00003f;");
         finaceColor.setStyle("-fx-background-color:  #00003f;");
+        deliverycolor.setStyle("-fx-background-color:  #00003f;");
+        suppliercolor.setStyle("-fx-background-color:  #00003f;");
     }
 
     public void btnFinaceOnAction(MouseEvent mouseEvent) {
         dashBoardColor.setStyle("-fx-background-color: #00003f;");
-        customerbtnColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color:  #f5f5f5;");
         empolyeeColor.setStyle("-fx-background-color:  #00003f;");
         ordersColor.setStyle("-fx-background-color:  #00003f;");
         inventoryColor.setStyle("-fx-background-color:  #00003f;");
-        finaceColor.setStyle("-fx-background-color:  #f5f5f5;");
+        finaceColor.setStyle("-fx-background-color:  #00003f;");
+        deliverycolor.setStyle("-fx-background-color:  #00003f;");
+        suppliercolor.setStyle("-fx-background-color:  #00003f;");
+    }
+
+    public void btnOnDelivery(MouseEvent mouseEvent) {
+        //dashBoardColor.setStyle("-fx-background-color: #00003f;");
+        dashBoardColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color:  #f5f5f5;");
+        empolyeeColor.setStyle("-fx-background-color:  #00003f;");
+        ordersColor.setStyle("-fx-background-color:  #00003f;");
+        inventoryColor.setStyle("-fx-background-color:  #00003f;");
+        finaceColor.setStyle("-fx-background-color:  #00003f;");
+        deliverycolor.setStyle("-fx-background-color:  #00003f;");
+        suppliercolor.setStyle("-fx-background-color:  #00003f;");
+    }
+
+    public void btnOnSupplier(MouseEvent mouseEvent) {
+        dashBoardColor.setStyle("-fx-background-color: #00003f;");
+        customerbtnColor.setStyle("-fx-background-color:  #f5f5f5;");
+        empolyeeColor.setStyle("-fx-background-color:  #00003f;");
+        ordersColor.setStyle("-fx-background-color:  #00003f;");
+        inventoryColor.setStyle("-fx-background-color:  #00003f;");
+        finaceColor.setStyle("-fx-background-color:  #00003f;");
+        deliverycolor.setStyle("-fx-background-color:  #00003f;");
+        suppliercolor.setStyle("-fx-background-color:  #00003f;");
     }
 }
 
