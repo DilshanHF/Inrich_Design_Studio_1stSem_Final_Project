@@ -11,6 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
 import lk.ijse.InrichDesignStudio.Model.IncomeModel;
+import lk.ijse.InrichDesignStudio.bo.custom.IncomeBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.IncomeBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.incomeTm;
 import lk.ijse.InrichDesignStudio.dto.IncomeDto;
 import net.sf.jasperreports.engine.*;
@@ -63,7 +65,8 @@ public class FinancialController implements Initializable {
     @FXML
     private DatePicker datePicker;
 
-    IncomeModel exModel = new IncomeModel();
+    //IncomeModel exModel = new IncomeModel();
+    IncomeBO incomeBO = new IncomeBOImpl();
 
 
     public void btnOnExpensesDetails(ActionEvent actionEvent) throws IOException {
@@ -86,7 +89,7 @@ public class FinancialController implements Initializable {
         ObservableList<incomeTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<IncomeDto> dtoList = exModel.getAllIncome();
+            List<IncomeDto> dtoList = incomeBO.getAllIncome();
 
             for (IncomeDto dto : dtoList) {
                 obList.add(
@@ -105,6 +108,8 @@ public class FinancialController implements Initializable {
         } catch (SQLException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
 

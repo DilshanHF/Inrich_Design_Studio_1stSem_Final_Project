@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Model.ItemModel;
+import lk.ijse.InrichDesignStudio.bo.custom.ItemBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.ItemBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.itemTm;
 import lk.ijse.InrichDesignStudio.dto.ItemDto;
 import util.Regex;
@@ -58,7 +60,8 @@ public class InventoryController implements Initializable {
     @FXML
     private TextField txtType;
 
-    ItemModel iModel = new ItemModel();
+    //ItemModel iModel = new ItemModel();
+    ItemBO itemBO = new ItemBOImpl();
 
     public void btnOnInventoryDetails(ActionEvent actionEvent) throws IOException {
         mainPane.getChildren().clear();
@@ -75,10 +78,12 @@ public class InventoryController implements Initializable {
     public void btnOnAddItem(ActionEvent actionEvent) {
         boolean isExists = false;
         try {
-            isExists = iModel.exitItem(txtId.getText());
+            isExists = itemBO.existItem(txtId.getText());
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         if (!(txtId.getText().isEmpty() || txtName.getText().isEmpty() || txtType.getText().isEmpty() || txtPrise.getText().isEmpty())) {
@@ -99,7 +104,7 @@ public class InventoryController implements Initializable {
                         var dto = new ItemDto(id, name,type,amount);
 
                         try {
-                            boolean isSaved = iModel.saveItem(dto);
+                            boolean isSaved = itemBO.saveItem(dto);
                             if (isSaved) {
                                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Item  saved!", ButtonType.OK).show();
                                 //tblCustomer.refresh();
@@ -114,6 +119,8 @@ public class InventoryController implements Initializable {
                             e.printStackTrace();
                             new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
                             //new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
                         }
 
 
@@ -170,7 +177,7 @@ public class InventoryController implements Initializable {
                         var dto = new ItemDto(id, name, type,amount);
 
                         try {
-                            boolean isUpdated = iModel.updateItem(dto);
+                            boolean isUpdated = itemBO.updateItem(dto);
                             if (isUpdated) {
                                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Item updated!", ButtonType.OK).show();
                                 clearField();
@@ -182,6 +189,8 @@ public class InventoryController implements Initializable {
                         } catch (SQLException e) {
                             e.printStackTrace();
                             new SystemAlert(Alert.AlertType.ERROR, "Error", "Somehing went wrong!", ButtonType.OK).show();
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
                         }
 
                     }else {
@@ -212,10 +221,12 @@ public class InventoryController implements Initializable {
             if (Regex.getItemCode().matcher(txtId.getText()).matches()) {
                 boolean isExists = false;
                 try {
-                    isExists = iModel.exitItem(txtId.getText());
+                    isExists = itemBO.existItem(txtId.getText());
                 } catch (SQLException e) {
                     e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
                 if (isExists) {
                     ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
@@ -230,7 +241,7 @@ public class InventoryController implements Initializable {
                         //lblError.setText("");
 
                         try {
-                            boolean isDeleted = iModel.deleteItem(id);
+                            boolean isDeleted = itemBO.deleteItem(id);
                             if (isDeleted) {
                                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Item has deleted!", ButtonType.OK).show();
                                 clearField();
@@ -243,6 +254,8 @@ public class InventoryController implements Initializable {
                         } catch (SQLException e) {
                             e.printStackTrace();
                             new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
                         }
                     }
                 }else {
@@ -283,25 +296,29 @@ public class InventoryController implements Initializable {
     private void loadAllItems() throws SQLException {
         ObservableList<itemTm> obList = FXCollections.observableArrayList();
 
-        List<ItemDto> dtoList = iModel.getAllItem();
-        for (ItemDto dto : dtoList) {
-            JFXButton button = new JFXButton("edit", new ImageView("assets/edit-97@30x.png"));
-            button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            button.getStyleClass().add("infoBtn");
-            setButtonOnAction(button);
-            obList.add(
-                    new itemTm(
-                            dto.getId(),
-                            dto.getName(),
-                            dto.getType(),
-                            dto.getAmount(),
-                            button
-                    )
-            );
-        }
+        try {
+            List<ItemDto> dtoList = itemBO.getAllItem();
+            for (ItemDto dto : dtoList) {
+                JFXButton button = new JFXButton("edit", new ImageView("assets/edit-97@30x.png"));
+                button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                button.getStyleClass().add("infoBtn");
+                setButtonOnAction(button);
+                obList.add(
+                        new itemTm(
+                                dto.getId(),
+                                dto.getName(),
+                                dto.getType(),
+                                dto.getAmount(),
+                                button
+                        )
+                );
+            }
 
-        tblItems.setItems(obList);
-        tblItems.refresh();
+            tblItems.setItems(obList);
+            tblItems.refresh();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

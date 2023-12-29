@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
 import lk.ijse.InrichDesignStudio.Model.InventoryModel;
+import lk.ijse.InrichDesignStudio.bo.custom.InventoryBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.InventoryBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.inventoryTm;
 import lk.ijse.InrichDesignStudio.dto.InventoryDto;
 import util.SystemAlert;
@@ -53,7 +55,10 @@ public class InventoryDetailController {
     @FXML
     private TableView<inventoryTm> tblInventory;
 
-InventoryModel inModel = new InventoryModel();
+
+    InventoryBO inventoryBO = new InventoryBOImpl();
+
+
     public void btnOnInventoryDetails(ActionEvent actionEvent) throws IOException {
         mainPane.getChildren().clear();
         mainPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/inventoryDetailForm.fxml")));
@@ -83,7 +88,7 @@ InventoryModel inModel = new InventoryModel();
         ObservableList<inventoryTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<InventoryDto> dtoList = inModel.getAllInventory();
+            List<InventoryDto> dtoList =inventoryBO.getAllInventory();
 
             for (InventoryDto dto : dtoList) {
                 JFXTextField button = new JFXTextField("Pending");
@@ -104,7 +109,7 @@ InventoryModel inModel = new InventoryModel();
 
             tblInventory.setItems(obList);
             tblInventory.refresh();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }

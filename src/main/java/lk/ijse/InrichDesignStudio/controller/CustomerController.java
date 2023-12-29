@@ -12,8 +12,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Model.CustomerModel;
+import lk.ijse.InrichDesignStudio.bo.custom.CustomerBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.CustomerBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.customerTm;
 import lk.ijse.InrichDesignStudio.dto.CustomerDto;
+import lk.ijse.InrichDesignStudio.entity.Customer;
 import util.Regex;
 import util.SystemAlert;
 
@@ -72,8 +75,8 @@ public class CustomerController implements Initializable {
 
 
 
-    CustomerModel cusModel = new CustomerModel();
-
+   // CustomerModel cusModel = new CustomerModel();
+    CustomerBO customerBO = new CustomerBOImpl();
 
 
 
@@ -83,7 +86,7 @@ public class CustomerController implements Initializable {
         ObservableList<customerTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDto> dtoList = cusModel.getAllCustomer();
+            ArrayList<CustomerDto> dtoList = customerBO.getAllCustomer();
 
             for (CustomerDto dto : dtoList) {
                 JFXButton button = new JFXButton("edit",new ImageView("assets/edit-97@30x.png"));
@@ -107,6 +110,8 @@ public class CustomerController implements Initializable {
         } catch (SQLException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -150,8 +155,8 @@ public class CustomerController implements Initializable {
     public void btnOnSaveCustomer(javafx.event.ActionEvent actionEvent) {
         boolean isExists = false;
         try {
-            isExists = cusModel.exitCustomer(txtId.getText());
-        } catch (SQLException e) {
+            isExists = customerBO.existCustomer(txtId.getText());
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
         }
@@ -180,7 +185,7 @@ public class CustomerController implements Initializable {
                                 var dto = new CustomerDto(id,name,address,tel,email);
 
                                 try {
-                                    boolean isSaved = cusModel.saveCustomer(dto);
+                                    boolean isSaved = customerBO.saveCustomer(dto);
                                     if (isSaved) {
                                         new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Customer  saved!", ButtonType.OK).show();
                                         tblCustomer.refresh();
@@ -189,7 +194,7 @@ public class CustomerController implements Initializable {
                                     } else {
                                         new SystemAlert(Alert.AlertType.WARNING, "Warning", "Customer not saved!", ButtonType.OK).show();
                                     }
-                                } catch (SQLException e) {
+                                } catch (SQLException | ClassNotFoundException e) {
                                     e.printStackTrace();
                                     new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
                                     //new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
@@ -270,7 +275,7 @@ public class CustomerController implements Initializable {
                           var dto = new CustomerDto(id, name, address, tel, email);
 
                           try {
-                              boolean isUpdated = cusModel.updateCustomer(dto);
+                              boolean isUpdated = customerBO.updateCustomer(dto);
                               if (isUpdated) {
                                   new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Customer updated!", ButtonType.OK).show();
                                   clearField();
@@ -279,7 +284,7 @@ public class CustomerController implements Initializable {
                               } else {
                                   new SystemAlert(Alert.AlertType.WARNING, "Warning", "Customer not updated!", ButtonType.OK).show();
                               }
-                          } catch (SQLException e) {
+                          } catch (SQLException | ClassNotFoundException e) {
                               e.printStackTrace();
                               new SystemAlert(Alert.AlertType.ERROR, "Error", "Somehing went wrong!", ButtonType.OK).show();
                           }
@@ -315,8 +320,8 @@ public class CustomerController implements Initializable {
             if (Regex.getCustomerId().matcher(txtId.getText()).matches()) {
                 boolean isExists = false;
                 try {
-                    isExists = cusModel.exitCustomer(txtId.getText());
-                } catch (SQLException e) {
+                    isExists = customerBO.existCustomer(txtId.getText());
+                } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
                 }
@@ -333,7 +338,7 @@ public class CustomerController implements Initializable {
                         //lblError.setText("");
 
                         try {
-                            boolean isDeleted = cusModel.deleteCustomer(id);
+                            boolean isDeleted = customerBO.deleteCustomer(id);
                             if (isDeleted) {
                                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Employee has deleted!", ButtonType.OK).show();
                                 clearField();
@@ -343,7 +348,7 @@ public class CustomerController implements Initializable {
                             } else {
                                 new SystemAlert(Alert.AlertType.WARNING, "Warning", "Employee not deleted!", ButtonType.OK).show();
                             }
-                        } catch (SQLException e) {
+                        } catch (SQLException | ClassNotFoundException e) {
                             e.printStackTrace();
                             new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
                         }
@@ -390,8 +395,8 @@ public class CustomerController implements Initializable {
     public void btnOnClickOnSearch(ActionEvent actionEvent) throws SQLException {
         boolean isExists = false;
         try {
-            isExists = cusModel.exitCustomer(txtSearchId.getText());
-        } catch (SQLException e) {
+            isExists = customerBO.existCustomer(txtSearchId.getText());
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
         }
@@ -400,7 +405,7 @@ public class CustomerController implements Initializable {
                 String id = txtSearchId.getText();
                 if (isExists){
                     try {
-                        CustomerDto customerDto = cusModel.searchCustomer(id);
+                        CustomerDto customerDto = customerBO.searchCustomer(id);
                         if (customerDto != null){
                             txtId.setText(customerDto.getId());
                             txtName.setText(customerDto.getName());
@@ -410,7 +415,7 @@ public class CustomerController implements Initializable {
                         }else {
                             new SystemAlert(Alert.AlertType.WARNING, "Warning", "No Customer Found!", ButtonType.OK).show();
                         }
-                    } catch (SQLException e) {
+                    } catch (SQLException | ClassNotFoundException e) {
                        // throw new RuntimeException(e);
                         new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
                     }

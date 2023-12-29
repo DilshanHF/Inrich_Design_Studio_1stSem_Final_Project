@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.InrichDesignStudio.Model.UserModel;
+import lk.ijse.InrichDesignStudio.bo.custom.UserBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.UserBOImpl;
 import lk.ijse.InrichDesignStudio.dto.UserDto;
 import util.Regex;
 import util.SystemAlert;
@@ -41,8 +43,8 @@ public class SignupController {
     private PasswordField rePassField;
 
 
-
-    private UserModel uModel = new UserModel();
+    UserBO userBO = new UserBOImpl();
+    // UserModel uModel = new UserModel();
 
     public void btnOnlogin(ActionEvent actionEvent) throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/loginPage.fxml"));
@@ -73,8 +75,8 @@ public class SignupController {
         }
         boolean isExist =false;
         try {
-            isExist = uModel.exitUser(email);
-        } catch (SQLException e) {
+            isExist = userBO.existUser(email);
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         if(!isExist) {
@@ -82,10 +84,10 @@ public class SignupController {
 
             if (password.equals(rePassword)) {
 
-                var dto = new UserDto(first_name, last_name, email, password);
+                var dto = new UserDto(email,first_name, last_name,  password);
 
                 try {
-                    boolean isSaved = uModel.saveUser(dto);
+                    boolean isSaved = userBO.saveUser(dto);
                     if (isSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Account Succesfully created").showAndWait();
 
@@ -96,7 +98,7 @@ public class SignupController {
                         resetFieldStyle(passField);
                         resetFieldStyle(rePassField);
                     }
-                } catch (SQLException e) {
+                } catch (SQLException | ClassNotFoundException e) {
                     new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
                 }
 

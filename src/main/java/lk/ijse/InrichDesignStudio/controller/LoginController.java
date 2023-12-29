@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.InrichDesignStudio.Mail.MailUtil;
 import lk.ijse.InrichDesignStudio.Model.UserModel;
+import lk.ijse.InrichDesignStudio.bo.custom.UserBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.UserBOImpl;
 import util.SystemAlert;
 
 import java.io.IOException;
@@ -30,7 +32,8 @@ public class LoginController {
     public static String password = null;
 
     public static String username;
-    private UserModel uModel = new UserModel();
+
+    UserBO userBO = new UserBOImpl();
 
 
     public void btnOnLogin(ActionEvent actionEvent) throws IOException {
@@ -42,7 +45,7 @@ public class LoginController {
 
         try {
             if (username != null || password != null) {
-                boolean isLogin = uModel.checkCredentials(username, password);
+                boolean isLogin = userBO.checkCredentials(username, password);
                 if (isLogin) {
                     resetFieldStyle(userNameField);
                     resetFieldStyle(txtHidePasword);

@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Model.ExpensesModel;
+import lk.ijse.InrichDesignStudio.bo.custom.ExpensesBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.ExpensesBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.expenseTm;
 import lk.ijse.InrichDesignStudio.dto.ExpenseDto;
 import util.SystemAlert;
@@ -60,8 +62,8 @@ public class ExpensesController implements Initializable {
     @FXML
     private TextField txtType;
 
-    ExpensesModel exModel = new ExpensesModel();
-
+    //ExpensesModel exModel = new ExpensesModel();
+    ExpensesBO expensesBO = new ExpensesBOImpl();
 
 
 

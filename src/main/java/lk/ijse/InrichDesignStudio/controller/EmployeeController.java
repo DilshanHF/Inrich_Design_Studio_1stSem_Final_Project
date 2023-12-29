@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Model.EmployeeModel;
+import lk.ijse.InrichDesignStudio.bo.custom.EmployeeBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.employeeTm;
 import lk.ijse.InrichDesignStudio.dto.CustomerDto;
 import lk.ijse.InrichDesignStudio.dto.EmployeeDto;
@@ -66,7 +68,8 @@ public class EmployeeController implements Initializable {
 
 
 
-    EmployeeModel empModel = new EmployeeModel();
+    //EmployeeModel empModel = new EmployeeModel();
+    EmployeeBO employeeBO = new EmployeeBOImpl();
 
 
     public void btnOnAttendance(ActionEvent actionEvent) throws IOException {
@@ -88,8 +91,8 @@ public class EmployeeController implements Initializable {
     public void btnOnSaveEmployee(ActionEvent actionEvent) {
         boolean isExists = false;
         try {
-            isExists = empModel.exitEmployee(txtId.getText());
-        } catch (SQLException e) {
+            isExists = employeeBO.existEmployee(txtId.getText());
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
         }
@@ -118,7 +121,7 @@ public class EmployeeController implements Initializable {
                                     var dto = new EmployeeDto(id,name,address,tel,nic);
 
                                     try {
-                                        boolean isSaved = empModel.saveEmployee(dto);
+                                        boolean isSaved = employeeBO.saveEmployee(dto);
                                         if (isSaved) {
                                             new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Employee  saved!", ButtonType.OK).show();
                                             //tblCustomer.refresh();
@@ -128,7 +131,7 @@ public class EmployeeController implements Initializable {
                                         } else {
                                             new SystemAlert(Alert.AlertType.WARNING, "Warning", "Employee not saved!", ButtonType.OK).show();
                                         }
-                                    } catch (SQLException e) {
+                                    } catch (SQLException | ClassNotFoundException e) {
                                         e.printStackTrace();
                                         new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
                                         //new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
@@ -209,10 +212,15 @@ public class EmployeeController implements Initializable {
                         String tel = txtTel.getText();
                         String nic = txtNic.getText();
 
-                        var dto = new CustomerDto(id, name, address, tel,nic);
+                        var dto = new EmployeeDto(id, name, address, tel,nic);
 
 
-                        boolean isUpdated = empModel.updateEmployee(dto);
+                        boolean isUpdated = false;
+                        try {
+                            isUpdated = employeeBO.updateEmployee(dto);
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
                         if (isUpdated) {
                             new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Employee updated!", ButtonType.OK).show();
                             loadAllCustomer();
@@ -253,8 +261,8 @@ public class EmployeeController implements Initializable {
             if (Regex.getEmployeeId().matcher(txtId.getText()).matches()) {
                 boolean isExists = false;
                 try {
-                    isExists = empModel.exitCustomer(txtId.getText());
-                } catch (SQLException e) {
+                    isExists = employeeBO.existEmployee(txtId.getText());
+                } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
                 }
@@ -271,7 +279,7 @@ public class EmployeeController implements Initializable {
                         //lblError.setText("");
 
                         try {
-                            boolean isDeleted = empModel.deleteEmployee(id);
+                            boolean isDeleted = employeeBO.deleteEmployee(id);
                             if (isDeleted) {
                                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Employee has deleted!", ButtonType.OK).show();
                                 clearField();
@@ -281,7 +289,7 @@ public class EmployeeController implements Initializable {
                             } else {
                                 new SystemAlert(Alert.AlertType.WARNING, "Warning", "Employee not deleted!", ButtonType.OK).show();
                             }
-                        } catch (SQLException e) {
+                        } catch (SQLException | ClassNotFoundException e) {
                             e.printStackTrace();
                             new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
                         }
@@ -314,7 +322,7 @@ public class EmployeeController implements Initializable {
         ObservableList<employeeTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<EmployeeDto> dtoList = empModel.getAllEmployee();
+            List<EmployeeDto> dtoList = employeeBO.getAllEmployee();
 
             for (EmployeeDto dto : dtoList) {
                 obList.add(
@@ -330,7 +338,7 @@ public class EmployeeController implements Initializable {
 
             tblEmployee.setItems(obList);
             tblEmployee.refresh();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
@@ -356,8 +364,8 @@ public class EmployeeController implements Initializable {
     public void btnOnClickOnSearch(ActionEvent actionEvent) {
         boolean isExists = false;
         try {
-            isExists = empModel.exitCustomer(txtSearchId.getText());
-        } catch (SQLException e) {
+            isExists = employeeBO.existEmployee(txtSearchId.getText());
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
         }
@@ -367,7 +375,7 @@ public class EmployeeController implements Initializable {
                 if (isExists){
                     try {
                         //CustomerDto customerDto = cusModel.searchCustomer(id);
-                        EmployeeDto empDto = empModel.searchEmployee(id);
+                        EmployeeDto empDto = employeeBO.searchEmployee(id);
                         if (empDto != null){
                             txtId.setText(empDto.getId());
                             txtName.setText(empDto.getName());
@@ -377,7 +385,7 @@ public class EmployeeController implements Initializable {
                         }else {
                             new SystemAlert(Alert.AlertType.WARNING, "Warning", "No Employee Found!", ButtonType.OK).show();
                         }
-                    } catch (SQLException e) {
+                    } catch (SQLException | ClassNotFoundException e) {
                         // throw new RuntimeException(e);
                         new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
                     }
