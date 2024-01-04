@@ -37,7 +37,8 @@ public class IncomeDAOImpl implements IncomeDAO {
 
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = SQLUtil.execute("SELECT income_id  FROM income ORDER BY income_id DESC LIMIT 1");
+        return rst.next()? String.format("IV%03d",Integer.parseInt(rst.getString(1).split("IV")[1])+1):"IV001";
     }
 
     @Override

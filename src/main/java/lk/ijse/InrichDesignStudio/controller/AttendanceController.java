@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.InrichDesignStudio.Model.AttendanceModel;
 import lk.ijse.InrichDesignStudio.Model.EmployeeModel;
+import lk.ijse.InrichDesignStudio.bo.custom.AttendanceBO;
+import lk.ijse.InrichDesignStudio.bo.custom.EmployeeBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.AttendanceBOimpl;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.attendanceTm;
 import lk.ijse.InrichDesignStudio.dto.AttendDto;
 import lk.ijse.InrichDesignStudio.dto.EmployeeDto;
@@ -61,8 +65,11 @@ public class AttendanceController {
     private JFXButton btnMarkAtt;
     ObservableList<attendanceTm> employee = FXCollections.observableArrayList();
 
-    EmployeeModel emodel = new EmployeeModel();
-    AttendanceModel model = new AttendanceModel();
+
+    EmployeeBO employeeBO = new EmployeeBOImpl();
+
+    AttendanceBO attendanceBO = new AttendanceBOimpl();
+
 
 
     public void btnOnAttendance(ActionEvent actionEvent) throws IOException {
@@ -142,9 +149,9 @@ public class AttendanceController {
                         adto.add(new AttendDto(id, name, nic, date, data));
                     }
                     try {
-                        boolean isExistId = model.existId(adto);
+                        boolean isExistId = attendanceBO.existAttendance(adto);
                         if(!isExistId){
-                            boolean isSavedmodel= model.saveAttendance(adto);
+                            boolean isSavedmodel= attendanceBO.saveAttendance(adto);
                             if (isSavedmodel){
                                 //new Alert(Alert.AlertType.CONFIRMATION,"Attendance Marked").showAndWait();
                                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Success", "Attendance Marked", ButtonType.OK).show();
@@ -161,7 +168,7 @@ public class AttendanceController {
                         }
 
 
-                    } catch (SQLException e) {
+                    } catch (SQLException | ClassNotFoundException e) {
                         //throw new RuntimeException(e);
                         new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
                     }
@@ -170,76 +177,7 @@ public class AttendanceController {
 
     }
 
-        /*LocalDate date = LocalDate.parse(lblDate.getText());
-        boolean isMarked = false;
-        try {
-            isMarked = model.existAttendance(date);
-        } catch (SQLException e) {
-           // throw new RuntimeException(e);
-            new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
-        }
-        if (!isMarked){
-            //ArrayList<attendDto> att = new ArrayList<attendDto>();
-            //attendDto att = new attendDto();
-            ObservableList<attendDto> att = FXCollections.observableArrayList();
-            for(attendanceTm tm : tblMarkAttend.getItems()){
-                String data = tm.getAttendance();
-                String id = tm.getE_id();
-                LocalTime time = LocalTime.parse(lblTime.getText());
-                try {
-                    attendDto Att;
-
-                    if (data.equals("Present")){
-                        Att = new attendDto(id,time,date,"Present");
-                    }else {
-                        Att = new attendDto(id,time,date,"Absent");
-                    }
-                    att.add(Att);
-
-                } catch (Exception e) {
-                    //throw new RuntimeException(e);
-                    //new SystemAlert(Alert.AlertType.ERROR,"Error","Something went wrong!", ButtonType.OK).show();
-                    new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
-                }
-            }
-            try {
-                boolean isSaved = model.saveAttendance(att);
-                if (isSaved){
-                    new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Attendance saved successfully!",ButtonType.OK).show();
-                   // loadAllAttendance();
-                }else {
-                    new SystemAlert(Alert.AlertType.WARNING,"Warning","Attendence not saved!",ButtonType.OK).show();
-                }
-            } catch (SQLException e) {
-                //throw new RuntimeException(e);
-                new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
-            }
-        }else {
-            new SystemAlert(Alert.AlertType.WARNING,"Warning","Attendance already marked!",ButtonType.OK).show();
-        }/*
-
-
-    }
-
-    /*private void loadAllAttendance() {
-        try {
-            boolean isMarked = model.existAttendance(LocalDate.now());
-            if (!isMarked){
-                List<employeeDto> edto = emodel.getAllEmployee();
-                ObservableList<attendanceTm> temp = FXCollections.observableArrayList();
-                for(employeeDto dto : edto){
-                    temp.add(new attendanceTm(dto.getId(), dto.getName(), dto.getNic(), "Not Marked"));
-                }
-                employee = temp;
-                tblMarkAttend.setItems(employee);
-            }else {
-                //ObservableList<attendanceTm> marked = model.
-            }
-        } catch (SQLException e) {
-            //throw new RuntimeException(e);
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
-        }
-    }*/
+       
 
     public void markAttendance(String id) throws SQLException {
 
@@ -247,13 +185,19 @@ public class AttendanceController {
         String empId = id;
         System.out.println(id);
 
-        EmployeeDto dto = EmployeeModel.searchEmployee(empId);
+        EmployeeDto dto = null;
+        try {
+            dto = employeeBO.searchEmployee(empId);
+            attendanceTm tm = new attendanceTm(dto.getId(), dto.getName(), dto.getNic(), "PRESENT");
 
-        attendanceTm tm = new attendanceTm(dto.getId(), dto.getName(), dto.getNic(), "PRESENT");
+            employee.add(tm);
 
-        employee.add(tm);
+            tblMarkAttend.setItems(employee);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
-        tblMarkAttend.setItems(employee);
+
 
 
 

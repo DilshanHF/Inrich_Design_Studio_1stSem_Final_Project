@@ -80,10 +80,12 @@ public class ExpensesController implements Initializable {
     public void btnOnAddExpenses(ActionEvent actionEvent) {
         boolean isExists = false;
         try {
-            isExists = exModel.exitExpensesId(txtId.getText());
+            isExists = expensesBO.existExpenses(txtId.getText());
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         if (!(txtId.getText().isEmpty()||txtDate.getValue()==null || txtDescription.getText().isEmpty()||txtType.getText().isEmpty()||txtAmount.getText().isEmpty())){
             resetFieldStyle(txtId);
@@ -102,7 +104,7 @@ public class ExpensesController implements Initializable {
 
                 var dto = new ExpenseDto(id,date,des,type,amount);
                 try {
-                    boolean isSaved = exModel.saveExpense(dto);
+                    boolean isSaved = expensesBO.saveExpenses(dto);
                     if (isSaved){
                         new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Expense  saved!", ButtonType.OK).show();
                         clearField();
@@ -115,6 +117,8 @@ public class ExpensesController implements Initializable {
                     //throw new RuntimeException(e);
                     new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
                     System.out.println(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
 
 
@@ -170,7 +174,7 @@ public class ExpensesController implements Initializable {
 
                 var dto = new ExpenseDto(id,date,des,type,amount);
                 try {
-                    boolean isUpdated = exModel.saveUpdate(dto);
+                    boolean isUpdated = expensesBO.updateExpenses(dto);
                     if (isUpdated){
                         new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Expense  saved!", ButtonType.OK).show();
                         clearField();
@@ -183,8 +187,9 @@ public class ExpensesController implements Initializable {
                     //throw new RuntimeException(e);
                     new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
                     System.out.println(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
-
 
 
         }else {
@@ -202,12 +207,14 @@ public class ExpensesController implements Initializable {
 
                 boolean isExists = false;
                 try {
-                    isExists = exModel.exitExpensesId(txtId.getText());
+                    isExists = expensesBO.existExpenses(txtId.getText());
                 } catch (SQLException e) {
                     e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
-                if (isExists) {
+            if (isExists) {
                     ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
                     ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
@@ -220,7 +227,7 @@ public class ExpensesController implements Initializable {
                         //lblError.setText("");
 
                         try {
-                            boolean isDeleted = exModel.deleteExpense(id);
+                            boolean isDeleted = expensesBO.deleteExpenses(id);
                             if (isDeleted) {
                                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Expenses has deleted!", ButtonType.OK).show();
                                 clearField();
@@ -233,6 +240,8 @@ public class ExpensesController implements Initializable {
                         } catch (SQLException e) {
                             e.printStackTrace();
                             new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
                         }
                     }
                 }else {
@@ -258,7 +267,7 @@ public class ExpensesController implements Initializable {
         ObservableList<expenseTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<ExpenseDto> dtoList = exModel.getAllExpenses();
+            List<ExpenseDto> dtoList = expensesBO.getAllExpenses();
 
             for (ExpenseDto dto : dtoList) {
                 obList.add(
@@ -277,6 +286,8 @@ public class ExpensesController implements Initializable {
         } catch (SQLException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
 

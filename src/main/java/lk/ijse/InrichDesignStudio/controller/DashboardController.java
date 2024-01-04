@@ -20,6 +20,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.InrichDesignStudio.Model.*;
+import lk.ijse.InrichDesignStudio.bo.custom.CustomerBO;
+import lk.ijse.InrichDesignStudio.bo.custom.ExpensesBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.CustomerBOImpl;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.ExpensesBOImpl;
 import lk.ijse.InrichDesignStudio.dto.UserDto;
 import util.SystemAlert;
 
@@ -85,11 +89,13 @@ public class DashboardController implements Initializable {
     QueryModel qModel = new QueryModel();
 
     CustomerModel cusModel = new CustomerModel();
+    //CustomerBO customerBO = new CustomerBOImpl();
     OrderModel oModel = new OrderModel();
     EmployeeModel eModel = new EmployeeModel();
 
     IncomeModel iModel = new IncomeModel();
-    ExpensesModel exModel = new ExpensesModel();
+   // ExpensesModel exModel = new ExpensesModel();
+    ExpensesBO expensesBO = new ExpensesBOImpl();
 
     private UserDto user;
 
@@ -174,23 +180,27 @@ public class DashboardController implements Initializable {
         try {
             XYChart.Series<String, Double> series = new XYChart.Series<>();
             series.getData().add(new XYChart.Data<>("Income", iModel.getTotalIncome()));
-            series.getData().add(new XYChart.Data<>("Expenses", exModel.getTotalExpenses()));
+            series.getData().add(new XYChart.Data<>("Expenses", expensesBO.getTotalExpenses()));
             barChart.getData().add(series);
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void setPieChart() {
         try {
             double totalIncome = iModel.getTotalIncome();
-            double totalExpenses = exModel.getTotalExpenses();
+            double totalExpenses = expensesBO.getTotalExpenses();
             pieChart.getData().add(new PieChart.Data("Income", Double.parseDouble(String.valueOf(totalIncome))));
             pieChart.getData().add(new PieChart.Data("Expenses", Double.parseDouble(String.valueOf(totalExpenses))));
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

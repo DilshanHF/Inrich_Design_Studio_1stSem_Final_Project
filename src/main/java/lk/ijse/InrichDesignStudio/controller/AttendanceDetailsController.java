@@ -15,6 +15,10 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
 import lk.ijse.InrichDesignStudio.Model.AttendanceModel;
 import lk.ijse.InrichDesignStudio.Model.EmployeeModel;
+import lk.ijse.InrichDesignStudio.bo.custom.AttendanceBO;
+import lk.ijse.InrichDesignStudio.bo.custom.EmployeeBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.AttendanceBOimpl;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.attendanceTm;
 import lk.ijse.InrichDesignStudio.dto.EmployeeDto;
 import lk.ijse.InrichDesignStudio.qr.QrGenerator;
@@ -72,8 +76,10 @@ public class AttendanceDetailsController implements Initializable {
     @FXML
     private Label lblName1;
 
-    EmployeeModel eModel = new EmployeeModel();
-    AttendanceModel model = new AttendanceModel();
+
+    EmployeeBO employeeBO = new EmployeeBOImpl();
+
+    AttendanceBO attendanceBO = new AttendanceBOimpl();
 
     public void btnOnGetQR(ActionEvent actionEvent) {
         if (cmbEmployeeId.getSelectionModel().getSelectedItem() != null){
@@ -103,13 +109,15 @@ public class AttendanceDetailsController implements Initializable {
         String id =  cmbEmployeeId.getValue();
 //        CustomerModel customerModel = new CustomerModel();
         try {
-            EmployeeDto dto = eModel.searchEmployee(id);
+            EmployeeDto dto = employeeBO.searchEmployee(id);
             lblName.setText(dto.getName());
 
 
         } catch (SQLException e) {
             // throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -128,7 +136,7 @@ public class AttendanceDetailsController implements Initializable {
     private void loadEmployeeId() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<EmployeeDto> empDto = eModel.getAllEmployee();
+            List<EmployeeDto> empDto = employeeBO.getAllEmployee();
 
             for (EmployeeDto dto : empDto) {
                 obList.add(dto.getId());
@@ -138,6 +146,8 @@ public class AttendanceDetailsController implements Initializable {
         } catch (SQLException e) {
             // throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -160,11 +170,13 @@ public class AttendanceDetailsController implements Initializable {
         LocalDate date = LocalDate.parse(txtDate.getValue().toString());
         ObservableList<attendanceTm> attendance = null;
         try {
-            attendance = model.getAttendanceOfDay(String.valueOf(date));
+            attendance = (ObservableList<attendanceTm>) attendanceBO.searchAttendance(String.valueOf(date));
             tblAttendance.setItems(attendance);
         } catch (SQLException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
 
@@ -174,7 +186,7 @@ public class AttendanceDetailsController implements Initializable {
         String id = (String) cmbOnReport.getValue();
 //        CustomerModel customerModel = new CustomerModel();
         try {
-            EmployeeDto dto = eModel.searchEmployee(id);
+            EmployeeDto dto = employeeBO.searchEmployee(id);
             lblName1.setText(dto.getName());
 
 
@@ -182,6 +194,8 @@ public class AttendanceDetailsController implements Initializable {
             // throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
 
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }

@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
 import lk.ijse.InrichDesignStudio.Mail.MailUtil;
 import lk.ijse.InrichDesignStudio.Model.*;
+import lk.ijse.InrichDesignStudio.bo.custom.PlaceOrderBO;
+import lk.ijse.InrichDesignStudio.bo.custom.impl.PlaceOrderBOImpl;
 import lk.ijse.InrichDesignStudio.dto.Tm.cartTm;
 import lk.ijse.InrichDesignStudio.dto.CustomerDto;
 import lk.ijse.InrichDesignStudio.dto.ItemDto;
@@ -103,10 +105,12 @@ public class PlaceOrderController {
     @FXML
     private TextField txtQty;
 
-    private IncomeModel inModel = new IncomeModel();
+    PlaceOrderBO placeOrderBO = new PlaceOrderBOImpl();
+
+
     private OrderModel oModel = new OrderModel();
-    private CustomerModel cusModel = new CustomerModel();
-    private ItemModel iModel = new ItemModel();
+   
+
     private PlaceModel pModel = new PlaceModel();
 
     private ObservableList<cartTm> obList = FXCollections.observableArrayList();
@@ -145,13 +149,13 @@ public class PlaceOrderController {
     private void loadItemCodes() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<ItemDto> itemDtos = iModel.getAllItem();
+            List<ItemDto> itemDtos = placeOrderBO.getAllItem();
 
             for (ItemDto dto : itemDtos) {
                 obList.add(dto.getId());
             }
             cmbItem.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
            // throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
@@ -160,7 +164,7 @@ public class PlaceOrderController {
     private void loadCustomerIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<CustomerDto> idList = cusModel.getAllCustomer();
+            List<CustomerDto> idList = placeOrderBO.getAllCustomer();
 
             for (CustomerDto dto : idList) {
                 obList.add(dto.getId());
@@ -169,7 +173,7 @@ public class PlaceOrderController {
             cmbCustomerId.setItems(obList);
             //cmbCustomerId.getItems().addAll(obList);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
@@ -177,10 +181,10 @@ public class PlaceOrderController {
 
     private void generateNextInvoiceId() {
         try {
-            String id = inModel.generateNextId();
+            String id = placeOrderBO.generateNewInvoiceId();
             lblInvoiceId.setText(id);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
@@ -204,11 +208,11 @@ public class PlaceOrderController {
         String id =  cmbCustomerId.getValue();
 //        CustomerModel customerModel = new CustomerModel();
         try {
-            CustomerDto customerDto = cusModel.searchCustomer(id);
+            CustomerDto customerDto = placeOrderBO.searchCustomer(id);
             lblCustomerName.setText(customerDto.getName());
             lblCustomerEmail.setText(customerDto.getEmail());
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
            // throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
@@ -219,11 +223,11 @@ public class PlaceOrderController {
 
         txtQty.requestFocus();
         try {
-            ItemDto dto = iModel.searchItem(code);
+            ItemDto dto = placeOrderBO.searchItem(code);
             lblItemName.setText(dto.getName());
             lblPrice.setText(String.valueOf(dto.getAmount()));
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
