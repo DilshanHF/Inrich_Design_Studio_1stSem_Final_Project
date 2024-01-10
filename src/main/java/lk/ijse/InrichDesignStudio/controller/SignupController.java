@@ -10,9 +10,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.InrichDesignStudio.Model.UserModel;
 import lk.ijse.InrichDesignStudio.bo.custom.UserBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.UserBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.UserDto;
 import util.Regex;
 import util.SystemAlert;
@@ -43,8 +43,8 @@ public class SignupController {
     private PasswordField rePassField;
 
 
-    UserBO userBO = new UserBOImpl();
-    // UserModel uModel = new UserModel();
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOTypes.USER);
+
 
     public void btnOnlogin(ActionEvent actionEvent) throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/loginPage.fxml"));

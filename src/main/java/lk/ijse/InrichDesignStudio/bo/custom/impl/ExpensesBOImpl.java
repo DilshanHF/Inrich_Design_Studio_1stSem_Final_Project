@@ -3,6 +3,8 @@ package lk.ijse.InrichDesignStudio.bo.custom.impl;
 import lk.ijse.InrichDesignStudio.bo.custom.ExpensesBO;
 import lk.ijse.InrichDesignStudio.dao.custom.ExpensesDAO;
 import lk.ijse.InrichDesignStudio.dao.custom.impl.ExpensesDAOImpl;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOFactory;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOTypes;
 import lk.ijse.InrichDesignStudio.dto.ExpenseDto;
 import lk.ijse.InrichDesignStudio.entity.Expense;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 
 public class ExpensesBOImpl implements ExpensesBO {
 
-    ExpensesDAO expensesDAO = new ExpensesDAOImpl();
+    ExpensesDAO expensesDAO = (ExpensesDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.EXPENSES);
     @Override
     public ArrayList<ExpenseDto> getAllExpenses() throws SQLException, ClassNotFoundException {
         ArrayList<ExpenseDto>expenseDtos = new ArrayList<>();

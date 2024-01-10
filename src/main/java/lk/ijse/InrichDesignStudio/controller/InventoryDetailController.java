@@ -11,9 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
-import lk.ijse.InrichDesignStudio.Model.InventoryModel;
 import lk.ijse.InrichDesignStudio.bo.custom.InventoryBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.InventoryBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.Tm.inventoryTm;
 import lk.ijse.InrichDesignStudio.dto.InventoryDto;
 import util.SystemAlert;
@@ -56,7 +56,7 @@ public class InventoryDetailController {
     private TableView<inventoryTm> tblInventory;
 
 
-    InventoryBO inventoryBO = new InventoryBOImpl();
+    InventoryBO inventoryBO = (InventoryBO) BOFactory.getBoFactory().getBO(BOTypes.INVENTORY);
 
 
     public void btnOnInventoryDetails(ActionEvent actionEvent) throws IOException {

@@ -11,12 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.InrichDesignStudio.Model.CustomerModel;
 import lk.ijse.InrichDesignStudio.bo.custom.CustomerBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.CustomerBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.Tm.customerTm;
 import lk.ijse.InrichDesignStudio.dto.CustomerDto;
-import lk.ijse.InrichDesignStudio.entity.Customer;
 import util.Regex;
 import util.SystemAlert;
 
@@ -24,7 +23,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -75,8 +73,8 @@ public class CustomerController implements Initializable {
 
 
 
-   // CustomerModel cusModel = new CustomerModel();
-    CustomerBO customerBO = new CustomerBOImpl();
+
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOTypes.CUSTOMER);
 
 
 

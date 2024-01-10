@@ -3,6 +3,8 @@ package lk.ijse.InrichDesignStudio.bo.custom.impl;
 import lk.ijse.InrichDesignStudio.bo.custom.CustomerBO;
 import lk.ijse.InrichDesignStudio.dao.custom.CustomerDAO;
 import lk.ijse.InrichDesignStudio.dao.custom.impl.CustomerDAOImpl;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOFactory;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOTypes;
 import lk.ijse.InrichDesignStudio.dto.CustomerDto;
 import lk.ijse.InrichDesignStudio.entity.Customer;
 
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 
 public class CustomerBOImpl implements CustomerBO {
 
-    CustomerDAO customerDAO = new CustomerDAOImpl();
+    CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.CUSTOMER);
     @Override
     public ArrayList<CustomerDto> getAllCustomer() throws SQLException, ClassNotFoundException {
         ArrayList<CustomerDto> customerDtos = new ArrayList<>();

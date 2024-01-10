@@ -4,6 +4,8 @@ import com.beust.ah.A;
 import lk.ijse.InrichDesignStudio.bo.custom.EmployeeBO;
 import lk.ijse.InrichDesignStudio.dao.custom.EmployeeDAO;
 import lk.ijse.InrichDesignStudio.dao.custom.impl.EmployeeDAOImpl;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOFactory;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOTypes;
 import lk.ijse.InrichDesignStudio.dto.EmployeeDto;
 import lk.ijse.InrichDesignStudio.entity.Employee;
 
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 
 public class EmployeeBOImpl implements EmployeeBO {
 
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.EMPLOYEE);
     @Override
     public boolean existEmployee(String id) throws SQLException, ClassNotFoundException {
         return employeeDAO.exist(id);

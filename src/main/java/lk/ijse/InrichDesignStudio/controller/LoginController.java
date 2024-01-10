@@ -13,9 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.InrichDesignStudio.Mail.MailUtil;
-import lk.ijse.InrichDesignStudio.Model.UserModel;
 import lk.ijse.InrichDesignStudio.bo.custom.UserBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.UserBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import util.SystemAlert;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class LoginController {
 
     public static String username;
 
-    UserBO userBO = new UserBOImpl();
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOTypes.USER);
 
 
     public void btnOnLogin(ActionEvent actionEvent) throws IOException {

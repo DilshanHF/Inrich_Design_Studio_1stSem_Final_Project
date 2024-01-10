@@ -14,9 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
 import lk.ijse.InrichDesignStudio.Mail.MailUtil;
-import lk.ijse.InrichDesignStudio.Model.*;
 import lk.ijse.InrichDesignStudio.bo.custom.PlaceOrderBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.PlaceOrderBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.Tm.cartTm;
 import lk.ijse.InrichDesignStudio.dto.CustomerDto;
 import lk.ijse.InrichDesignStudio.dto.ItemDto;
@@ -105,13 +105,8 @@ public class PlaceOrderController {
     @FXML
     private TextField txtQty;
 
-    PlaceOrderBO placeOrderBO = new PlaceOrderBOImpl();
+    PlaceOrderBO placeOrderBO = (PlaceOrderBO) BOFactory.getBoFactory().getBO(BOTypes.PLACEORDER);
 
-
-    private OrderModel oModel = new OrderModel();
-   
-
-    private PlaceModel pModel = new PlaceModel();
 
     private ObservableList<cartTm> obList = FXCollections.observableArrayList();
 
@@ -193,10 +188,10 @@ public class PlaceOrderController {
     private void generateNextOrderId() {
 
         try {
-            String id = oModel.generateNextId();
+            String id = placeOrderBO.generateNewOrderId();
             lblOrderId.setText(id);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             //throw new RuntimeException(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
@@ -336,7 +331,7 @@ public class PlaceOrderController {
 
         var dto = new PlaceOrderDto(orderId, date, customerId, invoiceId, handOverdate, type,amount, cartTmList);
         try {
-            boolean isSuccess = pModel.placeOrder(dto);
+            boolean isSuccess = placeOrderBO.placeOrder(dto);
             if (isSuccess) {
                 new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Order has placed!",ButtonType.OK).show();
                 generateInvoice(invoiceId, name,email ,orderId,tot);
@@ -346,7 +341,7 @@ public class PlaceOrderController {
             }else {
                 new SystemAlert(Alert.AlertType.INFORMATION,"Information","Order Not Placed'").showAndWait();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
             //throw new RuntimeException(e);
         }

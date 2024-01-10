@@ -9,11 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.InrichDesignStudio.Model.EmployeeModel;
 import lk.ijse.InrichDesignStudio.bo.custom.EmployeeBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.EmployeeBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.Tm.employeeTm;
-import lk.ijse.InrichDesignStudio.dto.CustomerDto;
 import lk.ijse.InrichDesignStudio.dto.EmployeeDto;
 import util.Regex;
 import util.SystemAlert;
@@ -69,7 +68,7 @@ public class EmployeeController implements Initializable {
 
 
     //EmployeeModel empModel = new EmployeeModel();
-    EmployeeBO employeeBO = new EmployeeBOImpl();
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOTypes.EMPLOYEE);
 
 
     public void btnOnAttendance(ActionEvent actionEvent) throws IOException {

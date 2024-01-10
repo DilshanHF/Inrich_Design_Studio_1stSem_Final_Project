@@ -10,9 +10,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
-import lk.ijse.InrichDesignStudio.Model.IncomeModel;
 import lk.ijse.InrichDesignStudio.bo.custom.IncomeBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.IncomeBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.Tm.incomeTm;
 import lk.ijse.InrichDesignStudio.dto.IncomeDto;
 import net.sf.jasperreports.engine.*;
@@ -66,7 +66,7 @@ public class FinancialController implements Initializable {
     private DatePicker datePicker;
 
     //IncomeModel exModel = new IncomeModel();
-    IncomeBO incomeBO = new IncomeBOImpl();
+    IncomeBO incomeBO = (IncomeBO) BOFactory.getBoFactory().getBO(BOTypes.INCOME);
 
 
     public void btnOnExpensesDetails(ActionEvent actionEvent) throws IOException {

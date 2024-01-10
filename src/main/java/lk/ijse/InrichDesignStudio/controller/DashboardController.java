@@ -19,11 +19,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.ijse.InrichDesignStudio.Model.*;
-import lk.ijse.InrichDesignStudio.bo.custom.CustomerBO;
-import lk.ijse.InrichDesignStudio.bo.custom.ExpensesBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.CustomerBOImpl;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.ExpensesBOImpl;
+import lk.ijse.InrichDesignStudio.bo.custom.*;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.UserDto;
 import util.SystemAlert;
 
@@ -86,16 +84,10 @@ public class DashboardController implements Initializable {
     @FXML
     private PieChart pieChart;
     
-    QueryModel qModel = new QueryModel();
 
-    CustomerModel cusModel = new CustomerModel();
-    //CustomerBO customerBO = new CustomerBOImpl();
-    OrderModel oModel = new OrderModel();
-    EmployeeModel eModel = new EmployeeModel();
 
-    IncomeModel iModel = new IncomeModel();
-   // ExpensesModel exModel = new ExpensesModel();
-    ExpensesBO expensesBO = new ExpensesBOImpl();
+
+   DashboardBO dashboardBO = (DashboardBO) BOFactory.getBoFactory().getBO(BOTypes.DASHBOARD);
 
     private UserDto user;
 
@@ -179,8 +171,8 @@ public class DashboardController implements Initializable {
     private void loadBarChart() {
         try {
             XYChart.Series<String, Double> series = new XYChart.Series<>();
-            series.getData().add(new XYChart.Data<>("Income", iModel.getTotalIncome()));
-            series.getData().add(new XYChart.Data<>("Expenses", expensesBO.getTotalExpenses()));
+            series.getData().add(new XYChart.Data<>("Income", dashboardBO.getTotalIncome()));
+            series.getData().add(new XYChart.Data<>("Expenses", dashboardBO.getTotalExpenses()));
             barChart.getData().add(series);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -192,8 +184,8 @@ public class DashboardController implements Initializable {
 
     private void setPieChart() {
         try {
-            double totalIncome = iModel.getTotalIncome();
-            double totalExpenses = expensesBO.getTotalExpenses();
+            double totalIncome = dashboardBO.getTotalIncome();
+            double totalExpenses = dashboardBO.getTotalExpenses();
             pieChart.getData().add(new PieChart.Data("Income", Double.parseDouble(String.valueOf(totalIncome))));
             pieChart.getData().add(new PieChart.Data("Expenses", Double.parseDouble(String.valueOf(totalExpenses))));
         } catch (SQLException e) {
@@ -206,13 +198,13 @@ public class DashboardController implements Initializable {
 
     private void loadDetails() {
         try {
-            String totalCustomer = cusModel.getTotalCustomers();
-            String totalOrders = oModel.getTotalOrders();
-            String totalEmployees = eModel.getTotalEmployees();
+            String totalCustomer = dashboardBO.getTotalCustomers();
+            String totalOrders = dashboardBO.getTotalOrders();
+            String totalEmployees = dashboardBO.getTotalEmployees();
             lblCustomer.setText(totalCustomer);
             lblOrders.setText(totalOrders);
             lblEmployee.setText(totalEmployees);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
         }

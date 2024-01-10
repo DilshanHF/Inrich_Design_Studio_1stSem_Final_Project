@@ -22,7 +22,8 @@ public class IncomeDAOImpl implements IncomeDAO {
 
     @Override
     public boolean save(Income dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("INSERT INTO income VALUES(?, ?, ?,?,?)",
+                dto.getInvoiceId(),dto.getOrderId(),dto.getType(),dto.getAmount(),dto.getDate());
     }
 
     @Override
@@ -49,5 +50,15 @@ public class IncomeDAOImpl implements IncomeDAO {
     @Override
     public Income search(String id) throws SQLException, ClassNotFoundException {
         return null;
+    }
+
+    @Override
+    public double getTotalIncome() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT SUM(amount) FROM income");
+
+        if(rst.next()){
+            return rst.getDouble(1);
+        }
+        return 0;
     }
 }

@@ -56,4 +56,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return new Employee(rst.getString(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(5));
 
     }
+
+    @Override
+    public String getTotalEmployees() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT COUNT(e_id) FROM employee");
+        if(rst.next()) {
+            return rst.getString(1);
+
+        }
+        return null;
+    }
 }

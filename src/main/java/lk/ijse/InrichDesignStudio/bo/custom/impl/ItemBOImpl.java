@@ -3,6 +3,8 @@ package lk.ijse.InrichDesignStudio.bo.custom.impl;
 import lk.ijse.InrichDesignStudio.bo.custom.ItemBO;
 import lk.ijse.InrichDesignStudio.dao.custom.ItemDAO;
 import lk.ijse.InrichDesignStudio.dao.custom.impl.ItemDAOImpl;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOFactory;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOTypes;
 import lk.ijse.InrichDesignStudio.dto.ItemDto;
 import lk.ijse.InrichDesignStudio.entity.Item;
 
@@ -10,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ItemBOImpl implements ItemBO {
-    ItemDAO itemDAO = new ItemDAOImpl();
+    ItemDAO itemDAO = (ItemDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.ITEM);
 
     @Override
     public ArrayList<ItemDto> getAllItem() throws SQLException, ClassNotFoundException {

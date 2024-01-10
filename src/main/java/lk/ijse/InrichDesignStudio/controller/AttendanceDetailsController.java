@@ -13,12 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.InrichDesignStudio.Db.DbConnection;
-import lk.ijse.InrichDesignStudio.Model.AttendanceModel;
-import lk.ijse.InrichDesignStudio.Model.EmployeeModel;
 import lk.ijse.InrichDesignStudio.bo.custom.AttendanceBO;
 import lk.ijse.InrichDesignStudio.bo.custom.EmployeeBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.AttendanceBOimpl;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.EmployeeBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.Tm.attendanceTm;
 import lk.ijse.InrichDesignStudio.dto.EmployeeDto;
 import lk.ijse.InrichDesignStudio.qr.QrGenerator;
@@ -77,9 +75,9 @@ public class AttendanceDetailsController implements Initializable {
     private Label lblName1;
 
 
-    EmployeeBO employeeBO = new EmployeeBOImpl();
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOTypes.EMPLOYEE);
 
-    AttendanceBO attendanceBO = new AttendanceBOimpl();
+    AttendanceBO attendanceBO = (AttendanceBO) BOFactory.getBoFactory().getBO(BOTypes.ATTENDANCE);
 
     public void btnOnGetQR(ActionEvent actionEvent) {
         if (cmbEmployeeId.getSelectionModel().getSelectedItem() != null){

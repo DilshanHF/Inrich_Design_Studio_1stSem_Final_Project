@@ -11,9 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.InrichDesignStudio.Model.ItemModel;
 import lk.ijse.InrichDesignStudio.bo.custom.ItemBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.ItemBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.Tm.itemTm;
 import lk.ijse.InrichDesignStudio.dto.ItemDto;
 import util.Regex;
@@ -60,8 +60,8 @@ public class InventoryController implements Initializable {
     @FXML
     private TextField txtType;
 
-    //ItemModel iModel = new ItemModel();
-    ItemBO itemBO = new ItemBOImpl();
+
+    ItemBO itemBO = (ItemBO) BOFactory.getBoFactory().getBO(BOTypes.ITEM);
 
     public void btnOnInventoryDetails(ActionEvent actionEvent) throws IOException {
         mainPane.getChildren().clear();

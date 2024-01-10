@@ -16,12 +16,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.ijse.InrichDesignStudio.Model.AttendanceModel;
-import lk.ijse.InrichDesignStudio.Model.EmployeeModel;
 import lk.ijse.InrichDesignStudio.bo.custom.AttendanceBO;
 import lk.ijse.InrichDesignStudio.bo.custom.EmployeeBO;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.AttendanceBOimpl;
-import lk.ijse.InrichDesignStudio.bo.custom.impl.EmployeeBOImpl;
+import lk.ijse.InrichDesignStudio.bo.factory.BOFactory;
+import lk.ijse.InrichDesignStudio.bo.factory.BOTypes;
 import lk.ijse.InrichDesignStudio.dto.Tm.attendanceTm;
 import lk.ijse.InrichDesignStudio.dto.AttendDto;
 import lk.ijse.InrichDesignStudio.dto.EmployeeDto;
@@ -66,9 +64,9 @@ public class AttendanceController {
     ObservableList<attendanceTm> employee = FXCollections.observableArrayList();
 
 
-    EmployeeBO employeeBO = new EmployeeBOImpl();
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOTypes.EMPLOYEE);
 
-    AttendanceBO attendanceBO = new AttendanceBOimpl();
+    AttendanceBO attendanceBO = (AttendanceBO) BOFactory.getBoFactory().getBO(BOTypes.ATTENDANCE);
 
 
 

@@ -3,6 +3,8 @@ package lk.ijse.InrichDesignStudio.bo.custom.impl;
 import lk.ijse.InrichDesignStudio.bo.custom.AttendanceBO;
 import lk.ijse.InrichDesignStudio.dao.custom.AttendanceDAO;
 import lk.ijse.InrichDesignStudio.dao.custom.impl.AttendanceDAOImpl;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOFactory;
+import lk.ijse.InrichDesignStudio.dao.factory.DAOTypes;
 import lk.ijse.InrichDesignStudio.dto.AttendDto;
 import lk.ijse.InrichDesignStudio.entity.Attend;
 
@@ -10,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AttendanceBOimpl implements AttendanceBO {
-    AttendanceDAO attendanceDAO = new AttendanceDAOImpl();
+    AttendanceDAO attendanceDAO = (AttendanceDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.ATTENDANCE);
     @Override
     public AttendDto searchAttendance(String id) throws SQLException, ClassNotFoundException {
         Attend attend = attendanceDAO.search(id);
